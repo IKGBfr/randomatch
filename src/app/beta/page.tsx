@@ -519,7 +519,7 @@ export default function Home() {
               </CounterBadge>
               
               <PromoTag>
-                🎁 Les 100 premiers = ACCÈS PRIORITAIRE + GRATUIT !
+                🎁 3 mois gratuits pour les 100 premiers !
               </PromoTag>
               
               {error && <ErrorMessage>{error}</ErrorMessage>}

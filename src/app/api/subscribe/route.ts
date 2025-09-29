@@ -1,17 +1,17 @@
 // app/api/subscribe/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import * as brevo from '@getbrevo/brevo';
+import * as SibApiV3Sdk from '@sendinblue/client';
 
 // Initialize Brevo API
-const apiInstance = new brevo.ContactsApi();
+const apiInstance = new SibApiV3Sdk.ContactsApi();
 apiInstance.setApiKey(
-  brevo.ContactsApiApiKeys.apiKey, 
+  SibApiV3Sdk.ContactsApiApiKeys.apiKey, 
   process.env.BREVO_API_KEY as string
 );
 
-const emailApiInstance = new brevo.TransactionalEmailsApi();
+const emailApiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 emailApiInstance.setApiKey(
-  brevo.TransactionalEmailsApiApiKeys.apiKey,
+  SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
   process.env.BREVO_API_KEY as string
 );
 
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Create contact in Brevo
-    const contact = new brevo.CreateContact();
+    const contact = new SibApiV3Sdk.CreateContact();
     contact.email = email;
     contact.attributes = {
       PRENOM: firstName,
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
     await apiInstance.createContact(contact);
 
     // Send welcome email
-    const sendSmtpEmail = new brevo.SendSmtpEmail();
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
     sendSmtpEmail.sender = {
       name: process.env.BREVO_SENDER_NAME,
       email: process.env.BREVO_SENDER_EMAIL
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       email: email,
       name: firstName
     }];
-    sendSmtpEmail.subject = `Bienvenue sur RandoMatch ${firstName} ! 🥾`;
+    sendSmtpEmail.subject = `Tu es sur la liste d'attente RandoMatch ! 🥾`;
     sendSmtpEmail.htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -95,41 +95,12 @@ export async function POST(req: NextRequest) {
             color: #4a7044;
             margin-bottom: 20px;
           }
-          .content h3 {
-            color: #4a7044;
-            margin-top: 30px;
-            margin-bottom: 15px;
-          }
-          .content ul {
-            margin: 15px 0;
-            padding-left: 20px;
-          }
-          .content li {
-            margin: 10px 0;
-          }
           .promo-box {
             background: #f0f7f0;
             border-left: 4px solid #4a7044;
             padding: 20px;
             margin: 25px 0;
             border-radius: 5px;
-          }
-          .promo-box strong {
-            color: #4a7044;
-          }
-          .button-container {
-            text-align: center;
-            margin: 35px 0;
-          }
-          .button { 
-            display: inline-block; 
-            padding: 14px 35px; 
-            background: linear-gradient(135deg, #4a7044, #6b8e23); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 16px;
           }
           .footer { 
             background: #f8f9fa;
@@ -139,73 +110,36 @@ export async function POST(req: NextRequest) {
             font-size: 13px;
             border-top: 1px solid #e9ecef;
           }
-          .footer p {
-            margin: 5px 0;
-          }
-          .social {
-            margin: 20px 0;
-          }
-          .social a {
-            color: #4a7044;
-            text-decoration: none;
-            margin: 0 10px;
-          }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="header">
-            <h1>🥾 Bienvenue sur RandoMatch !</h1>
+            <h1>🥾 💕 RandoMatch</h1>
           </div>
           <div class="content">
-            <h2>Salut ${firstName} ! 👋</h2>
+            <h2>Salut ${firstName} !</h2>
             
-            <p>Félicitations ! Tu viens de rejoindre la plus grande communauté de randonneurs célibataires en France.</p>
+            <p>Tu es bien inscrit(e) sur la liste d'attente de RandoMatch.</p>
+            
+            <p>Tu seras parmi les premiers avertis dès que l'application sera disponible.</p>
             
             <div class="promo-box">
-              <strong>🎁 Offre spéciale 100 premiers inscrits :</strong><br>
-              Tu bénéficies de <strong>3 MOIS GRATUITS</strong> sur notre abonnement premium !<br>
-              Code promo automatiquement appliqué à ton compte.
+              <strong>📅 Date de lancement prévue :</strong><br>
+              Dimanche 26 octobre 2025<br><br>
+              Je travaille dur pour que tout soit prêt à cette date !
             </div>
             
-            <h3>✨ Prochaines étapes :</h3>
-            <ul>
-              <li><strong>Complète ton profil</strong> : Ajoute tes photos et décris tes randonnées préférées</li>
-              <li><strong>Explore les profils</strong> : Découvre des randonneurs dans le ${department}</li>
-              <li><strong>Rejoins un groupe</strong> : Des sorties sont organisées chaque week-end</li>
-              <li><strong>Lance des conversations</strong> : Le premier message est toujours gratuit</li>
-            </ul>
+            <p>En tant que membre de la liste d'attente, tu bénéficieras d'un accès prioritaire et gratuit pendant les premiers mois.</p>
             
-            <div class="button-container">
-              <a href="https://randomatch.fr/complete-profile?token=${Buffer.from(email).toString('base64')}" class="button">
-                Compléter mon profil →
-              </a>
-            </div>
-            
-            <p><strong>Quelques conseils pour bien démarrer :</strong></p>
-            <ul>
-              <li>📸 Les profils avec photo reçoivent 10x plus de matchs</li>
-              <li>🗺️ Mentionne tes sentiers favoris dans ta bio</li>
-              <li>🎒 Indique ton niveau (débutant, intermédiaire, expert)</li>
-              <li>💬 Sois authentique dans tes conversations</li>
-            </ul>
-            
-            <p>Des questions ? Réponds simplement à cet email, notre équipe est là pour t'aider !</p>
-            
-            <p>À très vite sur les sentiers ! 🏔️</p>
-            
-            <p><strong>L'équipe RandoMatch</strong></p>
+            <p>À très bientôt,<br>
+            <strong>Anthony</strong><br>
+            Développeur de RandoMatch</p>
           </div>
           
           <div class="footer">
-            <div class="social">
-              <a href="https://facebook.com/randomatch">Facebook</a>
-              <a href="https://instagram.com/randomatch">Instagram</a>
-              <a href="https://twitter.com/randomatch">Twitter</a>
-            </div>
-            <p>© 2024 RandoMatch - Tous droits réservés</p>
-            <p>Tu reçois cet email car tu t'es inscrit sur randomatch.fr avec l'adresse ${email}</p>
-            <p><a href="https://randomatch.fr/unsubscribe?email=${Buffer.from(email).toString('base64')}" style="color: #6c757d;">Se désinscrire</a></p>
+            <p>© 2024 RandoMatch</p>
+            <p>Tu reçois cet email car tu t'es inscrit(e) sur randomatch.fr</p>
           </div>
         </div>
       </body>
@@ -222,16 +156,11 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     );
 
-  } catch (error: unknown) {
+  } catch (error: any) {
     console.error('Brevo API Error:', error);
     
     // Check if email already exists
-    if (
-      (error && typeof error === 'object' && 'response' in error && 
-       error.response && typeof error.response === 'object' && 'status' in error.response &&
-       error.response.status === 409) ||
-      (error && typeof error === 'object' && 'status' in error && error.status === 409)
-    ) {
+    if (error.response?.status === 409 || error.status === 409) {
       return NextResponse.json(
         { error: 'Cet email est déjà inscrit' },
         { status: 409 }
