@@ -488,7 +488,7 @@ export default function Home() {
       } else {
         setError(result.error || 'Une erreur est survenue');
       }
-    } catch (err) {
+    } catch {
       setError('Erreur de connexion. Réessaye.');
     } finally {
       setIsSubmitting(false);

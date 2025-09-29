@@ -18,6 +18,7 @@ emailApiInstance.setApiKey(
 export async function POST(req: NextRequest) {
   try {
     const { firstName, email, department, gender } = await req.json();
+    console.log('📥 Received data from form:', { firstName, email, department, gender });
 
     // Validation
     if (!firstName || !email || !department || !gender) {
@@ -44,9 +45,12 @@ export async function POST(req: NextRequest) {
       DEPARTEMENT: department,
       GENRE: gender
     };
+    console.log('📤 Sending to Brevo attributes:', contact.attributes);
+    console.log('📋 List ID:', process.env.BREVO_LIST_ID);
     contact.listIds = [parseInt(process.env.BREVO_LIST_ID as string)];
     contact.updateEnabled = true;
 
+    console.log('🚀 Full contact object:', JSON.stringify(contact, null, 2));
     await apiInstance.createContact(contact);
 
     // Send welcome email
@@ -148,6 +152,7 @@ export async function POST(req: NextRequest) {
 
     await emailApiInstance.sendTransacEmail(sendSmtpEmail);
 
+    console.log('✅ Contact created successfully for:', email);
     return NextResponse.json(
       { 
         success: true, 
@@ -156,15 +161,19 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     );
 
-  } catch (error: any) {
-    console.error('Brevo API Error:', error);
+  } catch (error: unknown) {
+    console.error('❌ Brevo API Error:', error);
+    console.error('Error details:', (error as any)?.response?.body || error);
     
     // Check if email already exists
-    if (error.response?.status === 409 || error.status === 409) {
-      return NextResponse.json(
-        { error: 'Cet email est déjà inscrit' },
-        { status: 409 }
-      );
+    if (error && typeof error === 'object' && 'response' in error) {
+      const apiError = error as { response?: { status?: number }; status?: number };
+      if (apiError.response?.status === 409 || apiError.status === 409) {
+        return NextResponse.json(
+          { error: 'Cet email est déjà inscrit' },
+          { status: 409 }
+        );
+      }
     }
 
     return NextResponse.json(
