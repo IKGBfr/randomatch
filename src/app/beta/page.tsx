@@ -480,7 +480,8 @@ export default function Home() {
       } else {
         setError(result.error || 'Une erreur est survenue');
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Erreur:', error);
       setError('Erreur de connexion. Réessaye.');
     } finally {
       setIsSubmitting(false);
@@ -600,7 +601,7 @@ export default function Home() {
           )}
           
           <Disclaimer>
-            Données protégées selon RGPD. En t'inscrivant, tu acceptes nos conditions.
+            Données protégées selon RGPD. En t&apos;inscrivant, tu acceptes nos conditions.
           </Disclaimer>
         </ContentCard>
       </Container>
