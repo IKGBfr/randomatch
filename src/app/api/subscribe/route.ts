@@ -124,9 +124,9 @@ export async function POST(req: NextRequest) {
           <div class="content">
             <h2>Salut ${firstName} !</h2>
             
-            <p>Tu es bien inscrit(e) sur la liste d'attente de RandoMatch.</p>
+            <p>Tu es bien inscrit${gender === 'F' ? 'e' : ''} sur la liste d'attente de RandoMatch.</p>
             
-            <p>Tu seras parmi les premiers avertis dès que l'application sera disponible.</p>
+            <p>Tu seras parmi les premier${gender === 'F' ? 'ère' : ''}s averti${gender === 'F' ? 'e' : ''}s dès que l'application sera disponible.</p>
             
             <div class="promo-box">
               <strong>📅 Date de lancement prévue :</strong><br>
@@ -136,13 +136,15 @@ export async function POST(req: NextRequest) {
             
             <p>En tant que membre de la liste d'attente, tu bénéficieras d'un accès prioritaire et gratuit pendant les premiers mois.</p>
             
+            <p>J'ai hâte de t'aider à trouver ${gender === 'F' ? 'ton randonneur idéal' : 'ta randonneuse idéale'} !</p>
+            
             <p>À très bientôt,<br>
             <strong>Anthony</strong><br>
             Développeur de RandoMatch</p>
           </div>
           
           <div class="footer">
-            <p>© 2024 RandoMatch</p>
+            <p>© 2025 RandoMatch</p>
             <p>Tu reçois cet email car tu t'es inscrit(e) sur randomatch.fr</p>
           </div>
         </div>
