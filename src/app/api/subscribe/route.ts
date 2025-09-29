@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     contact.attributes = {
       PRENOM: firstName,
       DEPARTEMENT: department,
-      GENRE: gender
+      GENRE: gender === 'H' ? 'homme' : 'femme'
     };
     console.log('📤 Sending to Brevo attributes:', contact.attributes);
     console.log('📋 List ID:', process.env.BREVO_LIST_ID);
