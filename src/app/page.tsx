@@ -76,7 +76,7 @@ export default function HomePage() {
     <Container>
       <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🥾 💕</div>
       <Logo>RandoMatch</Logo>
-      <Tagline>L'amour commence sur les sentiers</Tagline>
+      <Tagline>L&apos;amour commence sur les sentiers</Tagline>
       <BetaButton href="/beta">
         Accès Beta
       </BetaButton>
