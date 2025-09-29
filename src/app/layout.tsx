@@ -26,6 +26,14 @@ export const metadata: Metadata = {
     description: "Rejoins la communauté de randonneurs célibataires",
     url: "https://randomatch.fr",
     siteName: "RandoMatch",
+    images: [
+      {
+        url: "https://randomatch.fr/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "RandoMatch - Rencontres pour Randonneurs",
+      }
+    ],
     locale: "fr_FR",
     type: "website",
   },
@@ -33,6 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RandoMatch - Rencontres pour Randonneurs",
     description: "Trouve ton partenaire de randonnée idéal",
+    images: ["https://randomatch.fr/og-image.jpg"],
   },
 };
 
