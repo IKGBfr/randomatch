@@ -163,7 +163,6 @@ export async function POST(req: NextRequest) {
 
   } catch (error: unknown) {
     console.error('❌ Brevo API Error:', error);
-    console.error('Error details:', (error as any)?.response?.body || error);
     
     // Check if email already exists
     if (error && typeof error === 'object' && 'response' in error) {
