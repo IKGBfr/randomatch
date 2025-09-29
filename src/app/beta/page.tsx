@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -96,11 +97,13 @@ const Subtitle = styled.p`
 `;
 
 const CounterBadge = styled.div`
-  background: linear-gradient(135deg, #4a7044, #6b8e23);
+  background: #6b8e23;
+  background-image: linear-gradient(135deg, #4a7044, #6b8e23);
   padding: 15px;
   border-radius: 12px;
   margin-bottom: 25px;
   box-shadow: 0 6px 20px rgba(75, 112, 68, 0.4);
+  -webkit-appearance: none;
 `;
 
 const CounterNumber = styled.div`
@@ -232,7 +235,8 @@ const RadioOption = styled.label`
 
 const SubmitButton = styled.button`
   width: 100%;
-  background: linear-gradient(135deg, #4a7044, #6b8e23);
+  background: #6b8e23;
+  background-image: linear-gradient(135deg, #4a7044, #6b8e23);
   color: white;
   padding: 15px 30px;
   border: none;
@@ -246,6 +250,9 @@ const SubmitButton = styled.button`
   box-shadow: 0 4px 15px rgba(75, 112, 68, 0.4);
   position: relative;
   overflow: hidden;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   
   &::before {
     content: '💕';
@@ -258,7 +265,8 @@ const SubmitButton = styled.button`
   }
   
   &:hover {
-    background: linear-gradient(135deg, #355e38, #4a7044);
+    background: #4a7044;
+    background-image: linear-gradient(135deg, #355e38, #4a7044);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(75, 112, 68, 0.6);
     
@@ -480,8 +488,7 @@ export default function Home() {
       } else {
         setError(result.error || 'Une erreur est survenue');
       }
-    } catch (error: unknown) {
-      console.error('Erreur:', error);
+    } catch (err) {
       setError('Erreur de connexion. Réessaye.');
     } finally {
       setIsSubmitting(false);
@@ -502,17 +509,17 @@ export default function Home() {
       <Container>
         <ContentCard>
           <Title>🥾 RandoMatch 💕</Title>
-          <Subtitle>Trouve ton partenaire de randonnée idéal</Subtitle>
+          <Subtitle>L&apos;app arrive bientôt ! Sois parmi les premiers avertis</Subtitle>
           
           {!success ? (
             <>
-              <CounterBadge>
+                <CounterBadge>
                 <CounterNumber>{counter}</CounterNumber>
-                <CounterText>randonneurs inscrits</CounterText>
+                <CounterText>futurs randonneurs intéressés</CounterText>
               </CounterBadge>
               
               <PromoTag>
-                🎁 Les 100 premiers = ACCÈS GRATUIT À VIE !
+                🎁 Les 100 premiers = ACCÈS PRIORITAIRE + GRATUIT !
               </PromoTag>
               
               {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -589,19 +596,22 @@ export default function Home() {
                 </FormGroup>
                 
                 <SubmitButton type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? 'Inscription en cours...' : 'Rejoindre la communauté'}
+                  {isSubmitting ? 'Inscription en cours...' : 'Me prévenir du lancement'}
                 </SubmitButton>
               </form>
             </>
           ) : (
             <SuccessMessage>
-              <h2>🎉 Bienvenue dans RandoMatch !</h2>
-              <p>Vérifie ta boîte mail pour confirmer ton inscription.</p>
+              <h2>🎉 Parfait, tu es sur la liste !</h2>
+              <p>On te préviendra dès que RandoMatch sera disponible.</p>
+              <p style={{ fontSize: '0.9rem', marginTop: '10px', opacity: 0.9 }}>
+                Lancement prévu : Début 2025
+              </p>
             </SuccessMessage>
           )}
           
           <Disclaimer>
-            Données protégées selon RGPD. En t&apos;inscrivant, tu acceptes nos conditions.
+            Données protégées selon RGPD. En t&apos;inscrivant, tu acceptes nos <Link href="/legal" style={{ color: '#6ba6cd', textDecoration: 'underline' }}>conditions</Link>.
           </Disclaimer>
         </ContentCard>
       </Container>
