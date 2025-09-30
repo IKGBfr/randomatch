@@ -605,7 +605,7 @@ export default function Home() {
               <h2>🎉 Parfait, tu es sur la liste !</h2>
               <p>On te préviendra dès que RandoMatch sera disponible.</p>
               <p style={{ fontSize: '0.9rem', marginTop: '10px', opacity: 0.9 }}>
-                Lancement prévu : Début 2025
+                Lancement prévu : Octobre 2025
               </p>
             </SuccessMessage>
           )}
