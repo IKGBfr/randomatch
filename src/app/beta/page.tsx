@@ -437,7 +437,8 @@ export default function Home() {
       } else {
         setError(result.error || 'Une erreur est survenue');
       }
-    } catch {
+    } catch (err) {
+      console.error('Error submitting form:', err);
       setError('Erreur de connexion. Réessaye.');
     } finally {
       setIsSubmitting(false);
