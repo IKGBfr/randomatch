@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import styled from '@emotion/styled';
 import Link from 'next/link';
@@ -93,27 +93,6 @@ const Title = styled.h1`
 const Subtitle = styled.p`
   font-size: 1.1rem;
   margin-bottom: 30px;
-  opacity: 0.95;
-`;
-
-const CounterBadge = styled.div`
-  background: #6b8e23;
-  background-image: linear-gradient(135deg, #4a7044, #6b8e23);
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-  box-shadow: 0 6px 20px rgba(75, 112, 68, 0.4);
-  -webkit-appearance: none;
-`;
-
-const CounterNumber = styled.div`
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-`;
-
-const CounterText = styled.div`
-  font-size: 0.9rem;
   opacity: 0.95;
 `;
 
@@ -420,7 +399,6 @@ const departments = [
 ];
 
 export default function Home() {
-  const [counter, setCounter] = useState(73);
   const [formData, setFormData] = useState({
     firstName: '',
     email: '',
@@ -430,34 +408,6 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    // Animate counter on load
-    const timer = setTimeout(() => {
-      const interval = setInterval(() => {
-        setCounter(prev => {
-          if (prev < 76) return prev + 1;
-          clearInterval(interval);
-          return prev;
-        });
-      }, 50);
-    }, 500);
-
-    // Periodic increment
-    const periodicTimer = setInterval(() => {
-      if (Math.random() > 0.8) {
-        setCounter(prev => {
-          if (prev >= 99) return 73;
-          return prev + 1;
-        });
-      }
-    }, 25000);
-
-    return () => {
-      clearTimeout(timer);
-      clearInterval(periodicTimer);
-    };
-  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
@@ -484,7 +434,6 @@ export default function Home() {
 
       if (response.ok) {
         setSuccess(true);
-        setCounter(prev => prev + 1);
       } else {
         setError(result.error || 'Une erreur est survenue');
       }
@@ -513,13 +462,8 @@ export default function Home() {
           
           {!success ? (
             <>
-                <CounterBadge>
-                <CounterNumber>{counter}</CounterNumber>
-                <CounterText>futurs randonneurs intéressés</CounterText>
-              </CounterBadge>
-              
               <PromoTag>
-                🎁 3 mois gratuits pour les 100 premiers !
+                ⚡ Sois averti·e en priorité du lancement dans ta région
               </PromoTag>
               
               {error && <ErrorMessage>{error}</ErrorMessage>}
