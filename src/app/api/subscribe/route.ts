@@ -134,7 +134,7 @@ export async function POST(req: NextRequest) {
               Je travaille dur pour que tout soit prêt à cette date !
             </div>
             
-            <p>En tant que membre de la liste d'attente, tu bénéficieras d'un accès prioritaire gratuit.</p>
+            <p>En tant que membre de la liste d'attente, tu bénéficieras d'un accès prioritaire.</p>
             
             <p>J'ai hâte de t'aider à trouver ${gender === 'F' ? 'ton randonneur idéal' : 'ta randonneuse idéale'} !</p>
             
