@@ -204,7 +204,7 @@ export async function POST(req: NextRequest) {
       <body>
         <div class="container">
           <div class="header">
-            <h1>🏔️ RandoMatch</h1>
+            <h1>RandoMatch 🩷</h1>
             <p>La première app de rencontres pour randonneurs</p>
           </div>
           
@@ -213,11 +213,11 @@ export async function POST(req: NextRequest) {
             
             <p>Tu es bien inscrit${gender === 'F' ? 'e' : ''} sur la liste d'attente de <strong>RandoMatch</strong>.</p>
             
-            <p>Félicitations ! Tu fais maintenant partie d'une communauté de passionnés qui, comme toi, rêvent de rencontrer ${gender === 'F' ? 'leur randonneur idéal' : 'leur randonneuse idéale'} 🥾💕</p>
-            
+<p>Félicitations ! Tu fais maintenant partie d'une communauté de passionnés qui, comme toi, rêvent de rencontrer ${gender === 'F' ? 'leur partenaire de rando idéal' : 'leur partenaire de rando idéale'} 🥾💕</p>
+
             <div class="promo-box">
               <strong>🚀 Lancement imminent</strong>
-              <p>RandoMatch arrive <strong>très bientôt</strong> ! Je peaufine les derniers détails pour vous offrir la meilleure expérience dès le premier jour.</p>
+              <p>RandoMatch arrive <strong>très bientôt</strong>Je peaufine les derniers détails pour vous offrir la meilleure expérience dès le premier jour.</p>
               <p style="margin-bottom: 0;">Tu seras parmi les <strong>tout premiers alertés</strong> dès que l'app sera disponible 🔔</p>
             </div>
 
@@ -232,8 +232,8 @@ export async function POST(req: NextRequest) {
             <div class="divider"></div>
 
             <p><strong>En attendant, parle de RandoMatch autour de toi !</strong> 🗣️<br>
-            Plus nous serons nombreux au lancement, plus tu auras de chances de trouver ${gender === 'F' ? 'ton match parfait' : 'ta match parfaite'}.</p>
-            
+Plus nous serons nombreux au lancement, plus tu auras de chances de trouver ${gender === 'F' ? 'ton partenaire idéal' : 'ta partenaire idéale'}.
+
             <p style="margin-top: 30px;">J'ai hâte de t'aider à rencontrer des personnes extraordinaires qui partagent ta passion pour la randonnée !</p>
             
             <p style="margin-top: 25px;">À très bientôt sur les sentiers,<br>
