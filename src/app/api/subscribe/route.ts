@@ -63,89 +63,188 @@ export async function POST(req: NextRequest) {
       email: email,
       name: firstName
     }];
-    sendSmtpEmail.subject = `Tu es sur la liste d'attente RandoMatch ! 🥾`;
+    sendSmtpEmail.subject = `Bienvenue sur RandoMatch ! 🏔️`;
     sendSmtpEmail.htmlContent = `
       <!DOCTYPE html>
       <html>
       <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
           body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: #333;
             margin: 0;
             padding: 0;
+            background-color: #f5f5f5;
           }
           .container { 
             max-width: 600px; 
-            margin: 0 auto; 
+            margin: 20px auto; 
             background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
           }
           .header { 
-            background: linear-gradient(135deg, #4a7044, #6b8e23); 
+            background: linear-gradient(135deg, #FF6B35, #F7931E); 
             color: white; 
             padding: 40px 30px; 
             text-align: center;
           }
           .header h1 {
             margin: 0;
-            font-size: 28px;
+            font-size: 32px;
+            font-weight: 700;
+          }
+          .header p {
+            margin: 10px 0 0 0;
+            font-size: 16px;
+            opacity: 0.95;
           }
           .content { 
             padding: 40px 30px;
             background: #ffffff;
           }
           .content h2 {
-            color: #4a7044;
+            color: #FF6B35;
             margin-bottom: 20px;
+            font-size: 24px;
+          }
+          .content p {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 15px;
           }
           .promo-box {
-            background: #f0f7f0;
-            border-left: 4px solid #4a7044;
+            background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(247,147,30,0.1));
+            border-left: 4px solid #FF6B35;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+          }
+          .promo-box strong {
+            color: #FF6B35;
+            font-size: 17px;
+            display: block;
+            margin-bottom: 10px;
+          }
+          .promo-box p {
+            margin: 10px 0;
+            line-height: 1.7;
+          }
+          .benefits {
+            background: #f8f9fa;
             padding: 20px;
+            border-radius: 8px;
             margin: 25px 0;
-            border-radius: 5px;
+          }
+          .benefits h3 {
+            color: #FF6B35;
+            font-size: 18px;
+            margin-bottom: 15px;
+          }
+          .benefit-item {
+            padding: 8px 0;
+            font-size: 15px;
+            color: #555;
+          }
+          .benefit-item::before {
+            content: "✓ ";
+            color: #FF6B35;
+            font-weight: bold;
+            margin-right: 8px;
+          }
+          .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 20px 0;
+            transition: transform 0.2s;
           }
           .footer { 
-            background: #f8f9fa;
-            padding: 25px;
+            background: #2d3748;
+            padding: 30px;
             text-align: center; 
-            color: #6c757d; 
+            color: #a0aec0; 
             font-size: 13px;
-            border-top: 1px solid #e9ecef;
+          }
+          .footer p {
+            margin: 8px 0;
+          }
+          .footer a {
+            color: #FF6B35;
+            text-decoration: none;
+          }
+          .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+            margin: 25px 0;
+          }
+          @media only screen and (max-width: 600px) {
+            .container {
+              margin: 0;
+              border-radius: 0;
+            }
+            .header, .content {
+              padding: 30px 20px;
+            }
+            .header h1 {
+              font-size: 26px;
+            }
           }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="header">
-            <h1>🥾 💕 RandoMatch</h1>
+            <h1>🏔️ RandoMatch</h1>
+            <p>La première app de rencontres pour randonneurs</p>
           </div>
+          
           <div class="content">
-            <h2>Salut ${firstName} !</h2>
+            <h2>Salut ${firstName} ! 👋</h2>
             
-            <p>Tu es bien inscrit${gender === 'F' ? 'e' : ''} sur la liste d'attente de RandoMatch.</p>
+            <p>Tu es bien inscrit${gender === 'F' ? 'e' : ''} sur la liste d'attente de <strong>RandoMatch</strong>.</p>
             
-            <p>Tu seras parmi les premier${gender === 'F' ? 'ère' : ''}s averti${gender === 'F' ? 'e' : ''}s dès que l'application sera disponible.</p>
+            <p>Félicitations ! Tu fais maintenant partie d'une communauté de passionnés qui, comme toi, rêvent de rencontrer ${gender === 'F' ? 'leur randonneur idéal' : 'leur randonneuse idéale'} 🥾💕</p>
             
             <div class="promo-box">
-              <strong>📅 Date de lancement prévue :</strong><br>
-              Dimanche 26 octobre 2025<br><br>
-              Je travaille dur pour que tout soit prêt à cette date !
+              <strong>🚀 Lancement imminent</strong>
+              <p>RandoMatch arrive <strong>très bientôt</strong> ! Je peaufine les derniers détails pour vous offrir la meilleure expérience dès le premier jour.</p>
+              <p style="margin-bottom: 0;">Tu seras parmi les <strong>tout premiers alertés</strong> dès que l'app sera disponible 🔔</p>
             </div>
+
+            <div class="benefits">
+              <h3>🎁 Tes avantages en tant que membre prioritaire :</h3>
+              <div class="benefit-item">Accès prioritaire au lancement de l'application</div>
+              <div class="benefit-item">Possibilité de créer ton profil avant tout le monde</div>
+              <div class="benefit-item">Plus de chances de rencontrer rapidement des profils compatibles</div>
+              <div class="benefit-item">Participation à la communauté dès le début</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <p><strong>En attendant, parle de RandoMatch autour de toi !</strong> 🗣️<br>
+            Plus nous serons nombreux au lancement, plus tu auras de chances de trouver ${gender === 'F' ? 'ton match parfait' : 'ta match parfaite'}.</p>
             
-            <p>En tant que membre de la liste d'attente, tu bénéficieras d'un accès prioritaire.</p>
+            <p style="margin-top: 30px;">J'ai hâte de t'aider à rencontrer des personnes extraordinaires qui partagent ta passion pour la randonnée !</p>
             
-            <p>J'ai hâte de t'aider à trouver ${gender === 'F' ? 'ton randonneur idéal' : 'ta randonneuse idéale'} !</p>
-            
-            <p>À très bientôt,<br>
+            <p style="margin-top: 25px;">À très bientôt sur les sentiers,<br>
             <strong>Anthony</strong><br>
-            Développeur de RandoMatch</p>
+            <span style="color: #888; font-size: 14px;">Fondateur de RandoMatch</span></p>
           </div>
           
           <div class="footer">
-            <p>© 2025 RandoMatch</p>
-            <p>Tu reçois cet email car tu t'es inscrit(e) sur randomatch.fr</p>
+            <p><strong>RandoMatch</strong> • L'amour se trouve sur les sentiers 🏔️</p>
+            <p style="margin-top: 15px;">Tu reçois cet email car tu t'es inscrit(e) sur <a href="https://randomatch.fr">randomatch.fr</a></p>
+            <p style="margin-top: 15px; font-size: 12px;">© 2025 RandoMatch. Tous droits réservés.</p>
           </div>
         </div>
       </body>

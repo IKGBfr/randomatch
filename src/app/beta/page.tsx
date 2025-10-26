@@ -266,14 +266,42 @@ const SubmitButton = styled.button`
 
 const SuccessMessage = styled.div`
   background: linear-gradient(135deg, #4a7044, #6b8e23);
-  padding: 20px;
+  padding: 25px;
   border-radius: 12px;
   text-align: center;
   animation: fadeIn 0.5s ease-out;
   
   h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 10px 0;
+  }
+`;
+
+const LaunchInfoBox = styled.div`
+  background: rgba(255, 193, 7, 0.15);
+  border: 2px solid rgba(255, 193, 7, 0.4);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+  
+  strong {
+    display: block;
+    color: #ffc107;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  
+  p {
+    font-size: 0.95rem;
+    opacity: 0.95;
+    margin: 0;
   }
 `;
 
@@ -281,8 +309,8 @@ const ErrorMessage = styled.div`
   background: rgba(220, 53, 69, 0.2);
   border: 2px solid #dc3545;
   color: #ff6b6b;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 12px;
+  border-radius: 10px;
   margin-bottom: 20px;
   text-align: center;
 `;
@@ -549,9 +577,11 @@ export default function Home() {
             <SuccessMessage>
               <h2>🎉 Parfait, tu es sur la liste !</h2>
               <p>On te préviendra dès que RandoMatch sera disponible.</p>
-              <p style={{ fontSize: '0.9rem', marginTop: '10px', opacity: 0.9 }}>
-                Lancement prévu : Octobre 2025
-              </p>
+              
+              <LaunchInfoBox>
+                <strong>🚀 Lancement imminent</strong>
+                <p>Tu seras parmi les tout premiers alertés ! Reste connecté·e 🏔️</p>
+              </LaunchInfoBox>
             </SuccessMessage>
           )}
           
