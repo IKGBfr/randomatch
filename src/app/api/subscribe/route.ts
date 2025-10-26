@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
           }
           .header { 
-            background: linear-gradient(135deg, #FF6B35, #F7931E); 
+            background: linear-gradient(135deg, #66BB6A, #43A047); 
             color: white; 
             padding: 40px 30px; 
             text-align: center;
@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
             background: #ffffff;
           }
           .content h2 {
-            color: #FF6B35;
+            color: #43A047;
             margin-bottom: 20px;
             font-size: 24px;
           }
@@ -118,14 +118,14 @@ export async function POST(req: NextRequest) {
             font-size: 15px;
           }
           .promo-box {
-            background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(247,147,30,0.1));
-            border-left: 4px solid #FF6B35;
+            background: linear-gradient(135deg, rgba(102,187,106,0.1), rgba(67,160,71,0.1));
+            border-left: 4px solid #43A047;
             padding: 25px;
             margin: 30px 0;
             border-radius: 8px;
           }
           .promo-box strong {
-            color: #FF6B35;
+            color: #43A047;
             font-size: 17px;
             display: block;
             margin-bottom: 10px;
@@ -141,7 +141,7 @@ export async function POST(req: NextRequest) {
             margin: 25px 0;
           }
           .benefits h3 {
-            color: #FF6B35;
+            color: #43A047;
             font-size: 18px;
             margin-bottom: 15px;
           }
@@ -152,13 +152,13 @@ export async function POST(req: NextRequest) {
           }
           .benefit-item::before {
             content: "✓ ";
-            color: #FF6B35;
+            color: #43A047;
             font-weight: bold;
             margin-right: 8px;
           }
           .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            background: linear-gradient(135deg, #66BB6A, #43A047);
             color: white;
             padding: 15px 35px;
             text-decoration: none;
@@ -179,7 +179,7 @@ export async function POST(req: NextRequest) {
             margin: 8px 0;
           }
           .footer a {
-            color: #FF6B35;
+            color: #66BB6A;
             text-decoration: none;
           }
           .divider {
@@ -213,7 +213,7 @@ export async function POST(req: NextRequest) {
             
             <p>Tu es bien inscrit${gender === 'F' ? 'e' : ''} sur la liste d'attente de <strong>RandoMatch</strong>.</p>
             
-<p>Félicitations ! Tu fais maintenant partie d'une communauté de passionnés qui, comme toi, rêvent de rencontrer ${gender === 'F' ? 'leur partenaire de rando idéal' : 'leur partenaire de rando idéale'} 🥾💕</p>
+            <p>Félicitations ! Tu fais maintenant partie d'une communauté de passionnés qui, comme toi, rêvent de rencontrer ${gender === 'F' ? 'leur partenaire de rando idéal' : 'leur partenaire de rando idéale'} 🥾💕</p>
 
             <div class="promo-box">
               <strong>🚀 Lancement imminent</strong>
@@ -232,7 +232,7 @@ export async function POST(req: NextRequest) {
             <div class="divider"></div>
 
             <p><strong>En attendant, parle de RandoMatch autour de toi !</strong> 🗣️<br>
-Plus nous serons nombreux au lancement, plus tu auras de chances de trouver ${gender === 'F' ? 'ton partenaire idéal' : 'ta partenaire idéale'}.
+            Plus nous serons nombreux au lancement, plus tu auras de chances de trouver ${gender === 'F' ? 'ton partenaire idéal' : 'ta partenaire idéale'}.</p>
 
             <p style="margin-top: 30px;">J'ai hâte de t'aider à rencontrer des personnes extraordinaires qui partagent ta passion pour la randonnée !</p>
             
