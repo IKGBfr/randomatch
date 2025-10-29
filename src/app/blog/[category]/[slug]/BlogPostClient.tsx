@@ -204,8 +204,15 @@ const ArticleContent = styled.div`
   }
   
   li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     line-height: 1.75;
+    color: #1f2937;
+    font-size: 1.0625rem;
+    
+    strong {
+      color: #10b981;
+      font-weight: 700;
+    }
   }
   
   blockquote {
