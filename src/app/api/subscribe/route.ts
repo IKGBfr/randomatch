@@ -71,132 +71,181 @@ export async function POST(req: NextRequest) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-          body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
+          * {
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            box-sizing: border-box;
           }
+          
+          body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #fafafa;
+            padding: 20px;
+          }
+          
           .container { 
-            max-width: 600px; 
-            margin: 20px auto; 
+            max-width: 560px; 
+            margin: 0 auto; 
             background: white;
-            border-radius: 10px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
           }
+          
           .header { 
             background: linear-gradient(135deg, #FE3C72, #FF5485); 
             color: white; 
             padding: 40px 30px; 
             text-align: center;
           }
+          
           .header h1 {
             margin: 0;
             font-size: 32px;
             font-weight: 700;
           }
+          
           .header p {
             margin: 10px 0 0 0;
             font-size: 16px;
             opacity: 0.95;
           }
+          
           .content { 
-            padding: 40px 30px;
-            background: #ffffff;
+            padding: 50px 40px;
           }
-          .content h2 {
-            color: #FE3C72;
-            margin-bottom: 20px;
+          
+          .greeting {
             font-size: 24px;
-          }
-          .content p {
-            margin-bottom: 15px;
-            color: #555;
-            font-size: 15px;
-          }
-          .promo-box {
-            background: linear-gradient(135deg, rgba(254,60,114,0.1), rgba(255,84,133,0.1));
-            border-left: 4px solid #FE3C72;
-            padding: 25px;
-            margin: 30px 0;
-            border-radius: 8px;
-          }
-          .promo-box strong {
-            color: #FE3C72;
-            font-size: 17px;
-            display: block;
-            margin-bottom: 10px;
-          }
-          .promo-box p {
-            margin: 10px 0;
-            line-height: 1.7;
-          }
-          .benefits {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 25px 0;
-          }
-          .benefits h3 {
-            color: #FE3C72;
-            font-size: 18px;
-            margin-bottom: 15px;
-          }
-          .benefit-item {
-            padding: 8px 0;
-            font-size: 15px;
-            color: #555;
-          }
-          .benefit-item::before {
-            content: "✓ ";
-            color: #FE3C72;
-            font-weight: bold;
-            margin-right: 8px;
-          }
-          .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #FE3C72, #FF5485);
-            color: white;
-            padding: 15px 35px;
-            text-decoration: none;
-            border-radius: 25px;
             font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+          }
+          
+          .message {
             font-size: 16px;
-            margin: 20px 0;
-            transition: transform 0.2s;
+            line-height: 1.8;
+            color: #4a4a4a;
+            margin-bottom: 20px;
           }
+          
+          .highlight-box {
+            background: linear-gradient(135deg, #FFF5F7 0%, #FFE8ED 100%);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 40px 0;
+            text-align: center;
+          }
+          
+          .highlight-box .emoji {
+            font-size: 40px;
+            margin-bottom: 16px;
+          }
+          
+          .highlight-box h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #FE3C72;
+            margin-bottom: 12px;
+          }
+          
+          .highlight-box p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.7;
+            margin: 0;
+          }
+          
+          .social-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 32px;
+            margin: 40px 0;
+            text-align: center;
+          }
+          
+          .social-box h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+          }
+          
+          .social-box p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 24px;
+          }
+          
+          .fb-button {
+            display: inline-block;
+            background: #1877F2;
+            color: white;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+          }
+          
+          .fb-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+          }
+          
+          .signature {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #f0f0f0;
+            color: #666;
+            font-size: 15px;
+          }
+          
+          .signature strong {
+            color: #1a1a1a;
+            display: block;
+            margin-top: 12px;
+            font-size: 16px;
+          }
+          
           .footer { 
-            background: #2d3748;
-            padding: 30px;
+            background: #f8f8f8;
+            padding: 30px 40px;
             text-align: center; 
-            color: #a0aec0; 
+            color: #999; 
             font-size: 13px;
+            line-height: 1.8;
           }
-          .footer p {
-            margin: 8px 0;
-          }
+          
           .footer a {
             color: #FE3C72;
             text-decoration: none;
           }
-          .divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
-            margin: 25px 0;
-          }
+          
           @media only screen and (max-width: 600px) {
+            body {
+              padding: 0;
+            }
             .container {
-              margin: 0;
               border-radius: 0;
             }
-            .header, .content {
+            .header {
               padding: 30px 20px;
             }
             .header h1 {
               font-size: 26px;
+            }
+            .content {
+              padding: 32px 24px;
+            }
+            .greeting {
+              font-size: 22px;
+            }
+            .highlight-box, .social-box {
+              padding: 24px;
             }
           }
         </style>
@@ -204,47 +253,43 @@ export async function POST(req: NextRequest) {
       <body>
         <div class="container">
           <div class="header">
-            <h1>RandoMatch 🩷</h1>
+            <h1>RandoMatch 🤍</h1>
             <p>La première app de rencontres pour randonneurs</p>
           </div>
           
           <div class="content">
-            <h2>Salut ${firstName} ! 👋</h2>
+            <div class="greeting">Salut ${firstName} ! 👋</div>
             
-            <p>Tu es bien inscrit${gender === 'F' ? 'e' : ''} sur la liste d'attente de <strong>RandoMatch</strong>.</p>
-            
-            <p>Félicitations ! Tu fais maintenant partie d'une communauté de passionnés qui, comme toi, rêvent de rencontrer ${gender === 'F' ? 'leur partenaire de rando idéal' : 'leur partenaire de rando idéale'} 🥾💕</p>
+            <p class="message">
+              Bienvenue sur la liste d'attente ! Tu fais maintenant partie d'une communauté de passionnés qui rêvent de rencontrer ${gender === 'F' ? 'leur partenaire idéal' : 'leur partenaire idéale'} sur les sentiers.
+            </p>
 
-            <div class="promo-box">
-              <strong>🚀 Lancement imminent</strong>
-              <p>RandoMatch arrive <strong>très bientôt</strong>Je peaufine les derniers détails pour vous offrir la meilleure expérience dès le premier jour.</p>
-              <p style="margin-bottom: 0;">Tu seras parmi les <strong>tout premiers alertés</strong> dès que l'app sera disponible 🔔</p>
+            <div class="highlight-box">
+              <div class="emoji">🚀</div>
+              <h3>Lancement imminent</h3>
+              <p>Tu seras parmi les tout premiers alertés dès que l'app sera disponible. En attendant, n'hésite pas à partager RandoMatch autour de toi !</p>
             </div>
 
-            <div class="benefits">
-              <h3>🎁 Tes avantages en tant que membre prioritaire :</h3>
-              <div class="benefit-item">Accès prioritaire au lancement de l'application</div>
-              <div class="benefit-item">Possibilité de créer ton profil avant tout le monde</div>
-              <div class="benefit-item">Plus de chances de rencontrer rapidement des profils compatibles</div>
-              <div class="benefit-item">Participation à la communauté dès le début</div>
+            <div class="social-box">
+              <h3>📱 Rejoins-nous sur Facebook</h3>
+              <p>Suis notre page pour ne rien rater du lancement et partage RandoMatch avec tes amis randonneurs !</p>
+              <a href="https://www.facebook.com/randomatch/" class="fb-button">👍 Suivre @RandoMatch</a>
             </div>
 
-            <div class="divider"></div>
+            <p class="message">
+              Plus nous serons nombreux au lancement, plus tu auras de chances de faire de belles rencontres.
+            </p>
 
-            <p><strong>En attendant, parle de RandoMatch autour de toi !</strong> 🗣️<br>
-            Plus nous serons nombreux au lancement, plus tu auras de chances de trouver ${gender === 'F' ? 'ton partenaire idéal' : 'ta partenaire idéale'}.</p>
-
-            <p style="margin-top: 30px;">J'ai hâte de t'aider à rencontrer des personnes extraordinaires qui partagent ta passion pour la randonnée !</p>
-            
-            <p style="margin-top: 25px;">À très bientôt sur les sentiers,<br>
-            <strong>Anthony</strong><br>
-            <span style="color: #888; font-size: 14px;">Fondateur de RandoMatch</span></p>
+            <div class="signature">
+              À très bientôt sur les sentiers 🏔️
+              <strong>Anthony</strong>
+              <span style="color: #999; font-size: 13px; display: block; margin-top: 4px;">Fondateur de RandoMatch</span>
+            </div>
           </div>
           
           <div class="footer">
-            <p><strong>RandoMatch</strong> • L'amour se trouve sur les sentiers 🏔️</p>
-            <p style="margin-top: 15px;">Tu reçois cet email car tu t'es inscrit(e) sur <a href="https://randomatch.fr">randomatch.fr</a></p>
-            <p style="margin-top: 15px; font-size: 12px;">© 2025 RandoMatch. Tous droits réservés.</p>
+            <p>Tu reçois cet email car tu t'es inscrit(e) sur <a href="https://randomatch.fr">randomatch.fr</a></p>
+            <p style="margin-top: 12px;">© 2025 RandoMatch • L'amour se trouve sur les sentiers</p>
           </div>
         </div>
       </body>
