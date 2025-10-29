@@ -12,10 +12,18 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@getbrevo/brevo": "^3.0.1",
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^16.0.1",
     "@sendinblue/client": "^3.3.1",
+    "@types/mdx": "^2.0.13",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.548.0",
     "next": "15.5.2",
+    "next-mdx-remote": "^5.0.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

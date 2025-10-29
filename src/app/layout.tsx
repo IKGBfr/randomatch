@@ -1,34 +1,54 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat, Inter } from "next/font/google";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "RandoMatch - Rencontres pour Randonneurs",
+  metadataBase: new URL('https://www.randomatch.fr'),
+  title: {
+    default: "RandoMatch - Rencontres pour Randonneurs",
+    template: "%s | RandoMatch",
+  },
   description: "L'app de rencontres pour passionnés de randonnée. Trouve ton partenaire idéal pour explorer les sentiers.",
-  keywords: "rencontre, randonnée, dating, outdoor, montagne, nature, célibataires",
+  keywords: "rencontre, randonnée, dating, outdoor, montagne, nature, célibataires, hiking, trekking",
   authors: [{ name: "RandoMatch" }],
+  creator: "RandoMatch",
+  publisher: "RandoMatch",
+  
+  // Vérification Google Search Console
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+  },
+  
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
+  
   openGraph: {
     title: "RandoMatch - L'amour commence sur les sentiers",
     description: "Rejoins la communauté de randonneurs célibataires",
-    url: "https://randomatch.fr",
+    url: "https://www.randomatch.fr",
     siteName: "RandoMatch",
     images: [
       {
-        url: "https://randomatch.fr/og-image.jpg",
+        url: "https://www.randomatch.fr/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "RandoMatch - Rencontres pour Randonneurs",
@@ -37,11 +57,29 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     type: "website",
   },
+  
   twitter: {
     card: "summary_large_image",
     title: "RandoMatch - Rencontres pour Randonneurs",
     description: "Trouve ton partenaire de randonnée idéal",
-    images: ["https://randomatch.fr/og-image.jpg"],
+    images: ["https://www.randomatch.fr/og-image.jpg"],
+    creator: "@randomatch",
+  },
+
+  alternates: {
+    canonical: "https://www.randomatch.fr",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
@@ -50,12 +88,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
+
   return (
     <html lang="fr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${montserrat.variable} ${inter.variable} antialiased`}
       >
-        {children}
+        {GA_MEASUREMENT_ID && <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />}
+        <Header />
+        <main className="pt-16 md:pt-20 min-h-screen">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
