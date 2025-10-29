@@ -18,14 +18,14 @@ const Content = styled.div`
 
 const BackLink = styled(Link)`
   display: inline-block;
-  color: #4a7044;
+  color: #FE3C72;
   text-decoration: none;
   font-weight: 500;
   margin-bottom: 30px;
   transition: color 0.3s ease;
   
   &:hover {
-    color: #6b8e23;
+    color: #FF5485;
   }
 `;
 
@@ -43,7 +43,7 @@ const CategoryHeader = styled.header`
 
 const CategoryBadge = styled.div`
   display: inline-block;
-  background: #4a7044;
+  background: #FE3C72;
   color: white;
   padding: 8px 16px;
   border-radius: 8px;
@@ -131,7 +131,7 @@ const ArticleTitle = styled.h2`
   }
   
   a:hover {
-    color: #4a7044;
+    color: #FE3C72;
   }
 `;
 
@@ -154,13 +154,13 @@ const ArticleMeta = styled.div`
   }
   
   a {
-    color: #4a7044;
+    color: #FE3C72;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
     
     &:hover {
-      color: #6b8e23;
+      color: #FF5485;
     }
   }
 `;

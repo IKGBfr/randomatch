@@ -23,7 +23,7 @@ export default function AboutPage() {
           {/* Mission */}
           <section className="mb-12">
             <div className="flex items-center gap-3 mb-6">
-              <Target className="w-8 h-8 text-green-600" />
+              <Target className="w-8 h-8 text-pink-600" />
               <h2 className="text-3xl font-bold text-gray-900">Notre mission</h2>
             </div>
             <p className="text-lg text-gray-700 leading-relaxed">
@@ -47,13 +47,13 @@ export default function AboutPage() {
           {/* Notre approche */}
           <section className="mb-12">
             <div className="flex items-center gap-3 mb-6">
-              <Mountain className="w-8 h-8 text-green-600" />
+              <Mountain className="w-8 h-8 text-pink-600" />
               <h2 className="text-3xl font-bold text-gray-900">Notre approche</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-green-600" />
+                  <Users className="w-5 h-5 text-pink-600" />
                   Ciblage précis
                 </h3>
                 <p className="text-gray-700">
@@ -62,7 +62,7 @@ export default function AboutPage() {
               </div>
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-green-600" />
+                  <Heart className="w-5 h-5 text-pink-600" />
                   Rencontres authentiques
                 </h3>
                 <p className="text-gray-700">
@@ -77,19 +77,19 @@ export default function AboutPage() {
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Fonctionnalités principales</h2>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
+                <span className="flex-shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
                 <span className="text-gray-700">Matching basé sur la localisation et les affinités outdoor</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
+                <span className="flex-shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
                 <span className="text-gray-700">Filtres par département, niveau de randonnée et distance</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
+                <span className="flex-shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
                 <span className="text-gray-700">Messagerie intégrée pour échanger avant de se rencontrer</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
+                <span className="flex-shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
                 <span className="text-gray-700">Profils détaillés avec photos et centres d'intérêt</span>
               </li>
             </ul>
@@ -106,7 +106,7 @@ export default function AboutPage() {
 
           {/* Statut actuel */}
           <section className="mb-12">
-            <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+            <div className="bg-pink-50 border border-pink-200 rounded-lg p-6">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Phase de pré-lancement</h2>
               <p className="text-gray-700 mb-4">
                 RandoMatch est actuellement en développement final. Nous construisons une communauté de pré-inscrits 
@@ -114,7 +114,7 @@ export default function AboutPage() {
               </p>
               <Link 
                 href="/beta"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-700 hover:to-pink-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
               >
                 Rejoindre la bêta
               </Link>
@@ -125,15 +125,15 @@ export default function AboutPage() {
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Nos valeurs</h2>
             <div className="space-y-4">
-              <div className="border-l-4 border-green-600 pl-4">
+              <div className="border-l-4 border-pink-600 pl-4">
                 <h3 className="font-semibold text-gray-900 mb-1">Authenticité</h3>
                 <p className="text-gray-700">Des profils réels, des passions communes, des rencontres sincères.</p>
               </div>
-              <div className="border-l-4 border-green-600 pl-4">
+              <div className="border-l-4 border-pink-600 pl-4">
                 <h3 className="font-semibold text-gray-900 mb-1">Respect</h3>
                 <p className="text-gray-700">Un environnement sain et bienveillant pour tous les membres.</p>
               </div>
-              <div className="border-l-4 border-green-600 pl-4">
+              <div className="border-l-4 border-pink-600 pl-4">
                 <h3 className="font-semibold text-gray-900 mb-1">Simplicité</h3>
                 <p className="text-gray-700">Une application intuitive, sans fonctionnalités superflues.</p>
               </div>
@@ -148,7 +148,7 @@ export default function AboutPage() {
             </p>
             <Link 
               href="/contact"
-              className="inline-flex items-center text-green-600 hover:text-green-700 font-semibold"
+              className="inline-flex items-center text-pink-600 hover:text-pink-700 font-semibold"
             >
               Formulaire de contact →
             </Link>
@@ -158,7 +158,7 @@ export default function AboutPage() {
           <div className="mt-12 pt-8 border-t border-gray-200">
             <Link 
               href="/"
-              className="inline-flex items-center text-green-600 hover:text-green-700 font-semibold"
+              className="inline-flex items-center text-pink-600 hover:text-pink-700 font-semibold"
             >
               ← Retour à l'accueil
             </Link>

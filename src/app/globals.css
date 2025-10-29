@@ -12,12 +12,18 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+  
+  /* RandoMatch Theme Colors (aligned with Flutter app) */
+  --color-pink-50: #FFF0F3;
+  --color-pink-400: #FF5485;
+  --color-pink-600: #FE3C72;
+  --color-pink-700: #E5326A;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FFF0F3;
+    --foreground: #1a1a1a;
   }
 }
 

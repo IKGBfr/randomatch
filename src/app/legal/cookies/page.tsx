@@ -4,6 +4,10 @@ import { Cookie, BarChart3, Settings } from 'lucide-react';
 export const metadata = {
   title: 'Politique de Cookies',
   description: 'Gestion des cookies - RandoMatch',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function CookiesPage() {

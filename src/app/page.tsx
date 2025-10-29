@@ -8,11 +8,17 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #1a3a52 0%, #2d5f7f 25%, #4a8fb9 50%, #6ba6cd 75%, #8fc4e0 100%);
+  background: linear-gradient(135deg, 
+    #FFFFFF 0%, 
+    #FFF8F9 20%, 
+    #FFF0F3 40%, 
+    #FFE5EB 60%, 
+    #FFF0F3 80%, 
+    #FFFFFF 100%
+  );
   background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
-  color: white;
-  padding: 20px;
+  animation: gradientShift 25s ease infinite;
+  padding: 40px 20px;
   text-align: center;
   
   @keyframes gradientShift {
@@ -22,11 +28,45 @@ const Container = styled.div`
   }
 `;
 
+const ContentWrapper = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+`;
+
+const LogoIcon = styled.div`
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #FE3C72, #FF6B9D);
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32px auto;
+  box-shadow: 0 8px 24px rgba(254, 60, 114, 0.25);
+  
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 100px;
+    border-radius: 24px;
+    margin-bottom: 24px;
+  }
+`;
+
+const HeartIcon = styled.div`
+  font-size: 56px;
+  line-height: 1;
+  
+  @media (max-width: 768px) {
+    font-size: 48px;
+  }
+`;
+
 const Logo = styled.h1`
   font-size: 4rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
   
   @media (max-width: 768px) {
     font-size: 3rem;
@@ -35,51 +75,70 @@ const Logo = styled.h1`
 
 const Tagline = styled.p`
   font-size: 1.5rem;
-  margin-bottom: 40px;
-  opacity: 0.95;
-  max-width: 600px;
+  font-weight: 400;
+  color: #666666;
+  margin: 0 0 48px 0;
+  line-height: 1.5;
   
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+    margin-bottom: 40px;
   }
 `;
 
 const BetaButton = styled(Link)`
-  display: inline-block;
-  padding: 18px 40px;
-  background: linear-gradient(135deg, #4a7044, #6b8e23);
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 48px;
+  background: #FE3C72;
+  color: #FFFFFF;
   text-decoration: none;
-  border-radius: 50px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  box-shadow: 0 6px 30px rgba(75, 112, 68, 0.4);
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  letter-spacing: -0.01em;
   
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 40px rgba(75, 112, 68, 0.6);
+    background: #E5326A;
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 16px 40px;
+    font-size: 1rem;
   }
 `;
 
 const ComingSoon = styled.p`
   position: absolute;
-  bottom: 30px;
-  font-size: 0.9rem;
-  opacity: 0.7;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.875rem;
+  color: #999999;
+  font-weight: 500;
+  
+  @media (max-width: 768px) {
+    bottom: 30px;
+    font-size: 0.8125rem;
+  }
 `;
 
 export default function HomePage() {
   return (
     <Container>
-      <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🥾 💕</div>
-      <Logo>RandoMatch</Logo>
-      <Tagline>L&apos;amour commence sur les sentiers</Tagline>
-      <BetaButton href="/beta">
-        Accès Beta
-      </BetaButton>
+      <ContentWrapper>
+        <LogoIcon>
+          <HeartIcon>🤍</HeartIcon>
+        </LogoIcon>
+        <Logo>RandoMatch</Logo>
+        <Tagline>L&apos;amour commence sur les sentiers</Tagline>
+        <BetaButton href="/beta">
+          Accès Beta
+        </BetaButton>
+      </ContentWrapper>
       <ComingSoon>Lancement officiel bientôt</ComingSoon>
     </Container>
   );

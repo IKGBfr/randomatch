@@ -4,6 +4,10 @@ import { Shield, Mail, Database, Eye, Lock, Trash2 } from 'lucide-react';
 export const metadata = {
   title: 'Politique de Confidentialité',
   description: 'Protection des données personnelles - RandoMatch',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function PrivacyPage() {

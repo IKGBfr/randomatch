@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RandoMatch Logo Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 32px;
+    }
+
+    .instructions {
+      background: #F5F5F5;
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 48px;
+    }
+
+    .instructions h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #000000;
+    }
+
+    .instructions p {
+      margin: 8px 0;
+      color: #666666;
+      line-height: 1.6;
+    }
+
+    .instructions code {
+      background: #E5E5E5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .logo-card {
+      background: #FAFAFA;
+      border: 1px solid #E5E5E5;
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .logo-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #000000;
+      margin: 0 0 8px 0;
+    }
+
+    .logo-card p {
+      font-size: 12px;
+      color: #999999;
+      margin: 0 0 24px 0;
+    }
+
+    .logo-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: #ffffff;
+      border-radius: 12px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #FE3C72, #FF6B9D);
+      border-radius: 28px;
+      box-shadow: 0 8px 24px rgba(254, 60, 114, 0.25);
+    }
+
+    .logo.size-512 {
+      width: 512px;
+      height: 512px;
+      border-radius: 120px;
+    }
+
+    .logo.size-256 {
+      width: 256px;
+      height: 256px;
+      border-radius: 60px;
+    }
+
+    .logo.size-180 {
+      width: 180px;
+      height: 180px;
+      border-radius: 42px;
+    }
+
+    .logo.size-120 {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+    }
+
+    .logo.size-64 {
+      width: 64px;
+      height: 64px;
+      border-radius: 15px;
+    }
+
+    .logo.size-32 {
+      width: 32px;
+      height: 32px;
+      border-radius: 7px;
+    }
+
+    .heart {
+      line-height: 1;
+    }
+
+    .logo.size-512 .heart {
+      font-size: 240px;
+    }
+
+    .logo.size-256 .heart {
+      font-size: 120px;
+    }
+
+    .logo.size-180 .heart {
+      font-size: 84px;
+    }
+
+    .logo.size-120 .heart {
+      font-size: 56px;
+    }
+
+    .logo.size-64 .heart {
+      font-size: 30px;
+    }
+
+    .logo.size-32 .heart {
+      font-size: 15px;
+    }
+
+    /* Version transparente pour fond sombre */
+    .transparent-bg {
+      background: #1A1A1A;
+    }
+
+    /* Version avec texte */
+    .logo-with-text {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 32px;
+      background: #ffffff;
+      border-radius: 16px;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .logo-text {
+      font-size: 36px;
+      font-weight: 700;
+      color: #000000;
+      letter-spacing: -0.01em;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 20px;
+      background: #000000;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background: #333333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 RandoMatch Logo Generator</h1>
+
+    <div class="instructions">
+      <h2>📸 Comment capturer en haute résolution</h2>
+      <p><strong>Sur Mac :</strong></p>
+      <p>1. Appuie sur <code>Cmd + Shift + 4</code></p>
+      <p>2. Appuie sur <code>Espace</code> pour capturer une zone spécifique</p>
+      <p>3. Clique sur la zone du logo que tu veux capturer</p>
+      <p>4. Le fichier PNG sera automatiquement enregistré sur ton bureau</p>
+      
+      <p style="margin-top: 20px;"><strong>Sur Windows :</strong></p>
+      <p>1. Appuie sur <code>Windows + Shift + S</code></p>
+      <p>2. Sélectionne la zone du logo</p>
+      <p>3. Colle dans Paint ou un éditeur d'image et sauvegarde en PNG</p>
+
+      <p style="margin-top: 20px;"><strong>💡 Astuce :</strong> Zoom dans le navigateur (Cmd/Ctrl + +) avant la capture pour obtenir une résolution encore plus élevée !</p>
+    </div>
+
+    <div class="logo-grid">
+      <!-- Logo 512x512 - OpenGraph / Réseaux sociaux -->
+      <div class="logo-card">
+        <h3>Logo 512×512</h3>
+        <p>OpenGraph, Twitter Card, LinkedIn</p>
+        <div class="logo-wrapper">
+          <div class="logo size-512">
+            <span class="heart">🤍</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo 256x256 - App Icon -->
+      <div class="logo-card">
+        <h3>Logo 256×256</h3>
+        <p>App Icon, Profile Picture</p>
+        <div class="logo-wrapper">
+          <div class="logo size-256">
+            <span class="heart">🤍</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo 180x180 - Apple Touch Icon -->
+      <div class="logo-card">
+        <h3>Logo 180×180</h3>
+        <p>Apple Touch Icon</p>
+        <div class="logo-wrapper">
+          <div class="logo size-180">
+            <span class="heart">🤍</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo 120x120 - Standard -->
+      <div class="logo-card">
+        <h3>Logo 120×120</h3>
+        <p>Website, Documentation</p>
+        <div class="logo-wrapper">
+          <div class="logo size-120">
+            <span class="heart">🤍</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo 64x64 - Favicon HD -->
+      <div class="logo-card">
+        <h3>Logo 64×64</h3>
+        <p>Favicon HD</p>
+        <div class="logo-wrapper">
+          <div class="logo size-64">
+            <span class="heart">🤍</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo 32x32 - Favicon -->
+      <div class="logo-card">
+        <h3>Logo 32×32</h3>
+        <p>Favicon Standard</p>
+        <div class="logo-wrapper">
+          <div class="logo size-32">
+            <span class="heart">🤍</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Version sur fond sombre -->
+    <h1 style="margin-top: 64px;">🌙 Version fond sombre</h1>
+    <div class="logo-grid">
+      <div class="logo-card">
+        <h3>Logo 512×512 - Fond sombre</h3>
+        <p>Pour stories Instagram, posts sombres</p>
+        <div class="logo-wrapper transparent-bg">
+          <div class="logo size-512">
+            <span class="heart">🤍</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <h3>Logo 256×256 - Fond sombre</h3>
+        <p>Pour profils avec thème sombre</p>
+        <div class="logo-wrapper transparent-bg">
+          <div class="logo size-256">
+            <span class="heart">🤍</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Version avec texte -->
+    <h1 style="margin-top: 64px;">📝 Version avec texte</h1>
+    <div class="logo-card" style="max-width: 600px; margin: 0 auto;">
+      <h3>Logo + Texte</h3>
+      <p>Pour bannières, signatures email, headers</p>
+      <div class="logo-wrapper">
+        <div class="logo-with-text">
+          <div class="logo size-64">
+            <span class="heart">🤍</span>
+          </div>
+          <span class="logo-text">RandoMatch</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 64px; padding: 32px; background: #F5F5F5; border-radius: 12px;">
+      <p style="color: #666666; margin-bottom: 16px;">
+        <strong>Tailles recommandées pour les réseaux sociaux :</strong>
+      </p>
+      <ul style="text-align: left; max-width: 500px; margin: 0 auto; color: #666666; line-height: 2;">
+        <li><strong>Facebook :</strong> 512×512 (photo de profil) / 1200×630 (bannière)</li>
+        <li><strong>Instagram :</strong> 512×512 (profil) / 1080×1080 (post)</li>
+        <li><strong>Twitter :</strong> 512×512 (profil) / 1500×500 (bannière)</li>
+        <li><strong>LinkedIn :</strong> 400×400 (profil) / 1584×396 (bannière)</li>
+        <li><strong>YouTube :</strong> 800×800 (profil) / 2560×1440 (bannière)</li>
+        <li><strong>TikTok :</strong> 512×512 (profil)</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

@@ -10,20 +10,14 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #1a3a52 0%, #2d5f7f 25%, #4a8fb9 50%, #6ba6cd 75%, #8fc4e0 100%);
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
+  background: #FFFFFF;
   color: white;
   padding: 30px;
   text-align: center;
   font-family: 'Poppins', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   position: relative;
   
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+
   
   @media (max-width: 768px) {
     padding: 15px;
@@ -128,8 +122,8 @@ const Label = styled.label`
 const Input = styled.input`
   width: 100%;
   padding: 12px 15px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid rgba(74, 112, 68, 0.3);
+  background: #FFFFFF;
+  border: 2px solid rgba(254, 60, 114, 0.3);
   border-radius: 10px;
   color: #1a3a52;
   font-size: 1rem;
@@ -141,17 +135,17 @@ const Input = styled.input`
   
   &:focus {
     outline: none;
-    border-color: #4a7044;
-    background: white;
-    box-shadow: 0 0 15px rgba(74, 112, 68, 0.2);
+    border-color: #FE3C72;
+    background: #FFFFFF;
+    box-shadow: 0 0 15px rgba(254, 60, 114, 0.2);
   }
 `;
 
 const Select = styled.select`
   width: 100%;
   padding: 12px 15px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid rgba(74, 112, 68, 0.3);
+  background: #FFFFFF;
+  border: 2px solid rgba(254, 60, 114, 0.3);
   border-radius: 10px;
   color: #1a3a52;
   font-size: 1rem;
@@ -160,13 +154,13 @@ const Select = styled.select`
   
   &:focus {
     outline: none;
-    border-color: #4a7044;
-    background: white;
-    box-shadow: 0 0 15px rgba(74, 112, 68, 0.2);
+    border-color: #FE3C72;
+    background: #FFFFFF;
+    box-shadow: 0 0 15px rgba(254, 60, 114, 0.2);
   }
   
   option {
-    background: white;
+    background: #FFFFFF;
     color: #1a3a52;
   }
 `;
@@ -194,8 +188,8 @@ const RadioOption = styled.label`
     transition: all 0.3s ease;
     
     &:checked {
-      border-color: #6b8e23;
-      background: #6b8e23;
+      border-color: #FE3C72;
+      background: #FE3C72;
       
       &::after {
         content: '';
@@ -214,8 +208,8 @@ const RadioOption = styled.label`
 
 const SubmitButton = styled.button`
   width: 100%;
-  background: #6b8e23;
-  background-image: linear-gradient(135deg, #4a7044, #6b8e23);
+  background: #FE3C72;
+  background-image: linear-gradient(135deg, #E5326A, #FE3C72);
   color: white;
   padding: 15px 30px;
   border: none;
@@ -226,7 +220,7 @@ const SubmitButton = styled.button`
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 4px 15px rgba(75, 112, 68, 0.4);
+  box-shadow: 0 4px 15px rgba(254, 60, 114, 0.4);
   position: relative;
   overflow: hidden;
   -webkit-appearance: none;
@@ -244,10 +238,10 @@ const SubmitButton = styled.button`
   }
   
   &:hover {
-    background: #4a7044;
-    background-image: linear-gradient(135deg, #355e38, #4a7044);
+    background: #D12A5E;
+    background-image: linear-gradient(135deg, #D12A5E, #E5326A);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(75, 112, 68, 0.6);
+    box-shadow: 0 6px 20px rgba(254, 60, 114, 0.6);
     
     &::before {
       left: 20px;
@@ -265,7 +259,7 @@ const SubmitButton = styled.button`
 `;
 
 const SuccessMessage = styled.div`
-  background: linear-gradient(135deg, #4a7044, #6b8e23);
+  background: linear-gradient(135deg, #E5326A, #FE3C72);
   padding: 25px;
   border-radius: 12px;
   text-align: center;
@@ -579,7 +573,7 @@ export default function Home() {
           )}
           
           <Disclaimer>
-            Données protégées selon RGPD. En t&apos;inscrivant, tu acceptes nos <Link href="/legal" style={{ color: '#6ba6cd', textDecoration: 'underline' }}>conditions</Link>.
+            Données protégées selon RGPD. En t&apos;inscrivant, tu acceptes nos <Link href="/legal/mentions" style={{ color: '#6ba6cd', textDecoration: 'underline' }}>conditions</Link>.
           </Disclaimer>
         </ContentCard>
       </Container>

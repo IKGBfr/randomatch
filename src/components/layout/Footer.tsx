@@ -1,20 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import { Mountain, Heart, Mail, Facebook, Instagram } from 'lucide-react';
+import { Heart, Mail, Facebook, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer style={{ backgroundColor: '#1A1A1A' }} className="text-gray-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-green-600 to-emerald-700 shadow-lg">
-                <Mountain className="w-6 h-6 text-white" strokeWidth={2.5} />
+              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-pink-600 to-pink-700 shadow-lg">
+                <Heart className="w-6 h-6 text-white" strokeWidth={2.5} />
               </div>
               <span className="font-montserrat font-bold text-xl text-white">
                 RandoMatch
@@ -30,22 +30,22 @@ export default function Footer() {
             <h3 className="font-semibold text-white mb-4">Navigation</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm hover:text-green-400 transition-colors">
+                <Link href="/" className="text-sm hover:text-pink-400 transition-colors">
                   Accueil
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-sm hover:text-green-400 transition-colors">
+                <Link href="/blog" className="text-sm hover:text-pink-400 transition-colors">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/a-propos" className="text-sm hover:text-green-400 transition-colors">
+                <Link href="/a-propos" className="text-sm hover:text-pink-400 transition-colors">
                   À propos
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm hover:text-green-400 transition-colors">
+                <Link href="/contact" className="text-sm hover:text-pink-400 transition-colors">
                   Contact
                 </Link>
               </li>
@@ -57,22 +57,22 @@ export default function Footer() {
             <h3 className="font-semibold text-white mb-4">Légal</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/legal/mentions" className="text-sm hover:text-green-400 transition-colors">
+                <Link href="/legal/mentions" className="text-sm hover:text-pink-400 transition-colors">
                   Mentions légales
                 </Link>
               </li>
               <li>
-                <Link href="/legal/privacy" className="text-sm hover:text-green-400 transition-colors">
+                <Link href="/legal/privacy" className="text-sm hover:text-pink-400 transition-colors">
                   Confidentialité
                 </Link>
               </li>
               <li>
-                <Link href="/legal/terms" className="text-sm hover:text-green-400 transition-colors">
+                <Link href="/legal/terms" className="text-sm hover:text-pink-400 transition-colors">
                   CGU
                 </Link>
               </li>
               <li>
-                <Link href="/legal/cookies" className="text-sm hover:text-green-400 transition-colors">
+                <Link href="/legal/cookies" className="text-sm hover:text-pink-400 transition-colors">
                   Cookies
                 </Link>
               </li>
@@ -86,7 +86,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/beta"
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 rounded-lg transition-all"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-pink-600 to-pink-600 hover:from-pink-700 hover:to-pink-700 rounded-lg transition-all"
                 >
                   <Heart className="w-4 h-4" />
                   Rejoindre la bêta
@@ -108,7 +108,7 @@ export default function Footer() {
               href="https://www.facebook.com/randomatch/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-green-400 transition-colors"
+              className="text-gray-400 hover:text-pink-400 transition-colors"
               aria-label="Facebook"
             >
               <Facebook className="w-5 h-5" />
@@ -117,7 +117,7 @@ export default function Footer() {
               href="https://www.instagram.com/randomatch.fr/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-green-400 transition-colors"
+              className="text-gray-400 hover:text-pink-400 transition-colors"
               aria-label="Instagram"
             >
               <Instagram className="w-5 h-5" />

@@ -4,6 +4,10 @@ import { FileText, AlertTriangle } from 'lucide-react';
 export const metadata = {
   title: 'Conditions Générales d\'Utilisation',
   description: 'CGU du site RandoMatch',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function TermsPage() {

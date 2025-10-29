@@ -4,6 +4,10 @@ import { Mail } from 'lucide-react';
 export const metadata = {
   title: 'Mentions Légales',
   description: 'Informations légales du site RandoMatch',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function MentionsLegalesPage() {

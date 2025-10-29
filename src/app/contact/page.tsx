@@ -1,9 +1,249 @@
 'use client';
 
 import { useState } from 'react';
+import styled from '@emotion/styled';
 import Link from 'next/link';
 import { Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { fbEvents } from '@/lib/fbPixel';
+
+const PageContainer = styled.div`
+  min-height: 100vh;
+  background: #FFFFFF;
+  padding: 80px 20px;
+  
+  @media (max-width: 768px) {
+    padding: 40px 16px;
+  }
+`;
+
+const ContentWrapper = styled.div`
+  max-width: 720px;
+  margin: 0 auto;
+`;
+
+const FormCard = styled.div`
+  background: #FAFAFA;
+  border: 1px solid #E5E5E5;
+  border-radius: 16px;
+  padding: 64px;
+  
+  @media (max-width: 768px) {
+    padding: 32px 24px;
+    border-radius: 12px;
+  }
+`;
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+`;
+
+const Title = styled.h1`
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+  letter-spacing: -0.02em;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+const Description = styled.p`
+  font-size: 1.125rem;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 48px;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const Label = styled.label`
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333333;
+  letter-spacing: -0.01em;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #000000;
+  transition: all 0.2s ease;
+  
+  &::placeholder {
+    color: #999999;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #000000;
+    background: #FFFFFF;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #000000;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 160px;
+  transition: all 0.2s ease;
+  
+  &::placeholder {
+    color: #999999;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #000000;
+    background: #FFFFFF;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  padding: 16px;
+  background: #000000;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+  
+  &:hover:not(:disabled) {
+    background: #333333;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+const SuccessMessage = styled.div`
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+`;
+
+const SuccessContent = styled.div`
+  flex: 1;
+`;
+
+const SuccessTitle = styled.h3`
+  font-size: 1rem;
+  font-weight: 600;
+  color: #166534;
+  margin: 0 0 8px 0;
+`;
+
+const SuccessText = styled.p`
+  font-size: 0.9375rem;
+  color: #15803D;
+  margin: 0;
+`;
+
+const ErrorMessage = styled.div`
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+`;
+
+const ErrorText = styled.p`
+  font-size: 0.9375rem;
+  color: #DC2626;
+  margin: 0;
+`;
+
+const BackLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  margin-top: 32px;
+  font-size: 0.9375rem;
+  color: #666666;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #000000;
+  }
+`;
+
+const Spinner = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+`;
+
+const HiddenInput = styled.input`
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+`;
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -45,149 +285,119 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-gray-50 py-16">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-          <div className="flex items-center gap-3 mb-8">
-            <Mail className="w-10 h-10 text-green-600" />
-            <h1 className="text-4xl font-bold text-gray-900">Contactez-nous</h1>
-          </div>
+    <PageContainer>
+      <ContentWrapper>
+        <FormCard>
+          <Header>
+            <Mail style={{ width: 32, height: 32, color: '#000000' }} />
+            <Title>Contact</Title>
+          </Header>
 
-          <p className="text-gray-700 text-lg mb-8">
-            Une question, une suggestion ou besoin d'aide ? N'hésitez pas à nous contacter !
-          </p>
+          <Description>
+            Une question, une suggestion ou besoin d'aide ? N'hésitez pas à nous contacter.
+          </Description>
 
           {status === 'success' ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="font-semibold text-green-900 mb-1">Message envoyé !</h3>
-                  <p className="text-green-700">
-                    Merci pour votre message. Nous vous répondrons dans les plus brefs délais.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <SuccessMessage>
+              <CheckCircle2 style={{ width: 24, height: 24, color: '#16A34A', flexShrink: 0, marginTop: 2 }} />
+              <SuccessContent>
+                <SuccessTitle>Message envoyé</SuccessTitle>
+                <SuccessText>
+                  Merci pour votre message. Nous vous répondrons dans les plus brefs délais.
+                </SuccessText>
+              </SuccessContent>
+            </SuccessMessage>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <Form onSubmit={handleSubmit}>
               {/* Honeypot - champ caché anti-bot */}
-              <input
+              <HiddenInput
                 type="text"
                 name="website"
                 value={formData.website}
                 onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                className="hidden"
                 tabIndex={-1}
                 autoComplete="off"
               />
 
               {status === 'error' && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                  <div className="flex items-start gap-3">
-                    <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                    <p className="text-red-700 text-sm">{errorMessage}</p>
-                  </div>
-                </div>
+                <ErrorMessage>
+                  <AlertCircle style={{ width: 20, height: 20, color: '#DC2626', flexShrink: 0, marginTop: 2 }} />
+                  <ErrorText>{errorMessage}</ErrorText>
+                </ErrorMessage>
               )}
 
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Nom complet *
-                </label>
-                <input
+              <FormGroup>
+                <Label htmlFor="name">Nom complet *</Label>
+                <Input
                   type="text"
                   id="name"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder:text-gray-400"
                   placeholder="Jean Dupont"
+                  disabled={status === 'loading'}
                 />
-              </div>
+              </FormGroup>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email *
-                </label>
-                <input
+              <FormGroup>
+                <Label htmlFor="email">Email *</Label>
+                <Input
                   type="email"
                   id="email"
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder:text-gray-400"
                   placeholder="jean@exemple.fr"
+                  disabled={status === 'loading'}
                 />
-              </div>
+              </FormGroup>
 
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Sujet *
-                </label>
-                <input
+              <FormGroup>
+                <Label htmlFor="subject">Sujet *</Label>
+                <Input
                   type="text"
                   id="subject"
                   required
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder:text-gray-400"
                   placeholder="Question sur la pré-inscription"
+                  disabled={status === 'loading'}
                 />
-              </div>
+              </FormGroup>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Message *
-                </label>
-                <textarea
+              <FormGroup>
+                <Label htmlFor="message">Message *</Label>
+                <TextArea
                   id="message"
                   required
-                  rows={6}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none bg-white text-gray-900 placeholder:text-gray-400"
                   placeholder="Votre message..."
+                  disabled={status === 'loading'}
                 />
-              </div>
+              </FormGroup>
 
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-              >
+              <SubmitButton type="submit" disabled={status === 'loading'}>
                 {status === 'loading' ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <Spinner />
                     Envoi en cours...
                   </>
                 ) : (
                   <>
-                    <Send className="w-5 h-5" />
+                    <Send style={{ width: 20, height: 20 }} />
                     Envoyer le message
                   </>
                 )}
-              </button>
-            </form>
+              </SubmitButton>
+            </Form>
           )}
 
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <p className="text-sm text-gray-600">
-              Vous pouvez aussi nous contacter directement à :{' '}
-              <span className="font-mono text-green-600">contact[at]randomatch[dot]fr</span>
-            </p>
-          </div>
-
-          <div className="mt-8">
-            <Link 
-              href="/"
-              className="inline-flex items-center text-green-600 hover:text-green-700 font-semibold"
-            >
-              ← Retour à l'accueil
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+          <BackLink href="/">
+            ← Retour à l'accueil
+          </BackLink>
+        </FormCard>
+      </ContentWrapper>
+    </PageContainer>
   );
 }

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import styled from '@emotion/styled';
 import { ArticleSchema } from '@/components/analytics/ArticleSchema';
+import { CTABox, CTATitle, CTAButton, CTASubtext } from '@/components/blog/MDXComponents';
 
 interface BlogPost {
   title: string;
@@ -105,7 +106,7 @@ const ArticleHeader = styled.header`
 
 const CategoryBadge = styled.span`
   display: inline-block;
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, #FE3C72, #FF5485);
   color: white;
   padding: 0.375rem 0.875rem;
   border-radius: 20px;
@@ -188,7 +189,7 @@ const ArticleContent = styled.div`
     color: #1a1a1a;
   }
   
-  a {
+  a:not([class*="CTAButton"]) {
     color: #667eea;
     text-decoration: underline;
     transition: color 0.2s;
@@ -210,7 +211,7 @@ const ArticleContent = styled.div`
     font-size: 1.0625rem;
     
     strong {
-      color: #10b981;
+      color: #FE3C72;
       font-weight: 700;
     }
   }
@@ -449,7 +450,15 @@ export default function BlogPostPage({
           </ArticleHeader>
 
           <ArticleContent>
-            <MDXRemote {...post.content} />
+            <MDXRemote 
+              {...post.content}
+              components={{
+                CTABox,
+                CTATitle,
+                CTAButton,
+                CTASubtext,
+              }}
+            />
           </ArticleContent>
 
           <BackButton href="/blog">← Retour aux articles</BackButton>
