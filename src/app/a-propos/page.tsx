@@ -1,170 +1,339 @@
-import Link from 'next/link';
-import { Mountain, Users, Heart, Target } from 'lucide-react';
+'use client';
 
-export const metadata = {
-  title: 'À propos',
-  description: 'Découvrez RandoMatch, l\'application de rencontres pour passionnés de randonnée',
-};
+import Link from 'next/link';
+import styled from '@emotion/styled';
+import { Mountain, Users, Heart, Target } from 'lucide-react';
+import ContentLayout from '@/components/shared/ContentLayout';
+
+const Header = styled.div`
+  text-center;
+  margin-bottom: 48px;
+`;
+
+const Title = styled.h1`
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+const Subtitle = styled.p`
+  font-size: 1.25rem;
+  color: #666666;
+  margin: 0;
+`;
+
+const Section = styled.section`
+  margin-bottom: 48px;
+`;
+
+const SectionHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
+
+const SectionSubtitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 24px 0;
+`;
+
+const Paragraph = styled.p`
+  font-size: 1.0625rem;
+  color: #374151;
+  line-height: 1.75;
+  margin: 0;
+`;
+
+const InfoBox = styled.div`
+  background: #EFF6FF;
+  border-left: 4px solid #3B82F6;
+  padding: 24px;
+  border-radius: 0 8px 8px 0;
+`;
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const Card = styled.div`
+  background: #F9FAFB;
+  padding: 24px;
+  border-radius: 8px;
+`;
+
+const CardTitle = styled.h3`
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const CardText = styled.p`
+  font-size: 1rem;
+  color: #374151;
+  line-height: 1.6;
+  margin: 0;
+`;
+
+const List = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const ListItem = styled.li`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+`;
+
+const CheckIcon = styled.span`
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background: #FE3C72;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+`;
+
+const ListText = styled.span`
+  font-size: 1rem;
+  color: #374151;
+  line-height: 1.6;
+`;
+
+const ValueItem = styled.div`
+  border-left: 4px solid #FE3C72;
+  padding-left: 16px;
+`;
+
+const ValueTitle = styled.h3`
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+`;
+
+const ValueText = styled.p`
+  font-size: 1rem;
+  color: #374151;
+  margin: 0;
+`;
+
+const HighlightBox = styled.div`
+  background: #FFF5F7;
+  border: 1px solid #FFCDD8;
+  border-radius: 8px;
+  padding: 24px;
+`;
+
+const CTAButton = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #FE3C72, #FF5485);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(254, 60, 114, 0.25);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: linear-gradient(135deg, #E5326A, #FE3C72);
+    box-shadow: 0 6px 16px rgba(254, 60, 114, 0.35);
+    transform: translateY(-1px);
+  }
+`;
+
+const ContactLink = styled(Link)`
+  color: #FE3C72;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #E5326A;
+  }
+`;
+
+const Divider = styled.div`
+  border-top: 1px solid #E5E7EB;
+  padding-top: 32px;
+  margin-top: 48px;
+`;
 
 export default function AboutPage() {
   return (
-    <div className="bg-gray-50 py-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-          
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">À propos de RandoMatch</h1>
-            <p className="text-xl text-gray-600">
-              L'application de rencontres dédiée aux passionnés de randonnée
-            </p>
-          </div>
+    <ContentLayout maxWidth="1024px">
+      {/* Header */}
+      <Header>
+        <Title>À propos de RandoMatch</Title>
+        <Subtitle>L'application de rencontres dédiée aux passionnés de randonnée</Subtitle>
+      </Header>
 
-          {/* Mission */}
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <Target className="w-8 h-8 text-pink-600" />
-              <h2 className="text-3xl font-bold text-gray-900">Notre mission</h2>
-            </div>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              RandoMatch connecte des célibataires qui partagent une passion commune pour la randonnée et les activités outdoor. 
-              Notre objectif est simple : faciliter les rencontres authentiques autour d'une activité saine et enrichissante.
-            </p>
-          </section>
+      {/* Mission */}
+      <Section>
+        <SectionHeader>
+          <Target style={{ width: 32, height: 32, color: '#FE3C72' }} />
+          <SectionTitle>Notre mission</SectionTitle>
+        </SectionHeader>
+        <Paragraph>
+          RandoMatch connecte des célibataires qui partagent une passion commune pour la randonnée et les activités outdoor. 
+          Notre objectif est simple : faciliter les rencontres authentiques autour d'une activité saine et enrichissante.
+        </Paragraph>
+      </Section>
 
-          {/* Le problème */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Le constat</h2>
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
-              <p className="text-gray-700 leading-relaxed">
-                Les applications de rencontres généralistes ne permettent pas de filtrer efficacement par centres d'intérêt réels. 
-                Pour les randonneurs, trouver un partenaire qui partage cette passion est difficile. RandoMatch résout ce problème 
-                en créant une communauté dédiée aux amoureux de la montagne et des sentiers.
-              </p>
-            </div>
-          </section>
+      {/* Le problème */}
+      <Section>
+        <SectionSubtitle>Le constat</SectionSubtitle>
+        <InfoBox>
+          <Paragraph>
+            Les applications de rencontres généralistes ne permettent pas de filtrer efficacement par centres d'intérêt réels. 
+            Pour les randonneurs, trouver un partenaire qui partage cette passion est difficile. RandoMatch résout ce problème 
+            en créant une communauté dédiée aux amoureux de la montagne et des sentiers.
+          </Paragraph>
+        </InfoBox>
+      </Section>
 
-          {/* Notre approche */}
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <Mountain className="w-8 h-8 text-pink-600" />
-              <h2 className="text-3xl font-bold text-gray-900">Notre approche</h2>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-pink-600" />
-                  Ciblage précis
-                </h3>
-                <p className="text-gray-700">
-                  Tous les membres partagent la passion de la randonnée, ce qui facilite les échanges et augmente les affinités.
-                </p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-pink-600" />
-                  Rencontres authentiques
-                </h3>
-                <p className="text-gray-700">
-                  Fini les profils génériques. Ici, chaque utilisateur peut afficher son niveau de randonnée et ses préférences.
-                </p>
-              </div>
-            </div>
-          </section>
+      {/* Notre approche */}
+      <Section>
+        <SectionHeader>
+          <Mountain style={{ width: 32, height: 32, color: '#FE3C72' }} />
+          <SectionTitle>Notre approche</SectionTitle>
+        </SectionHeader>
+        <GridContainer>
+          <Card>
+            <CardTitle>
+              <Users style={{ width: 20, height: 20, color: '#FE3C72' }} />
+              Ciblage précis
+            </CardTitle>
+            <CardText>
+              Tous les membres partagent la passion de la randonnée, ce qui facilite les échanges et augmente les affinités.
+            </CardText>
+          </Card>
+          <Card>
+            <CardTitle>
+              <Heart style={{ width: 20, height: 20, color: '#FE3C72' }} />
+              Rencontres authentiques
+            </CardTitle>
+            <CardText>
+              Fini les profils génériques. Ici, chaque utilisateur peut afficher son niveau de randonnée et ses préférences.
+            </CardText>
+          </Card>
+        </GridContainer>
+      </Section>
 
-          {/* Fonctionnalités clés */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Fonctionnalités principales</h2>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
-                <span className="text-gray-700">Matching basé sur la localisation et les affinités outdoor</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
-                <span className="text-gray-700">Filtres par département, niveau de randonnée et distance</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
-                <span className="text-gray-700">Messagerie intégrée pour échanger avant de se rencontrer</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-pink-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">✓</span>
-                <span className="text-gray-700">Profils détaillés avec photos et centres d'intérêt</span>
-              </li>
-            </ul>
-          </section>
+      {/* Fonctionnalités clés */}
+      <Section>
+        <SectionSubtitle>Fonctionnalités principales</SectionSubtitle>
+        <List>
+          <ListItem>
+            <CheckIcon>✓</CheckIcon>
+            <ListText>Matching basé sur la localisation et les affinités outdoor</ListText>
+          </ListItem>
+          <ListItem>
+            <CheckIcon>✓</CheckIcon>
+            <ListText>Filtres par département, niveau de randonnée et distance</ListText>
+          </ListItem>
+          <ListItem>
+            <CheckIcon>✓</CheckIcon>
+            <ListText>Messagerie intégrée pour échanger avant de se rencontrer</ListText>
+          </ListItem>
+          <ListItem>
+            <CheckIcon>✓</CheckIcon>
+            <ListText>Profils détaillés avec photos et centres d'intérêt</ListText>
+          </ListItem>
+        </List>
+      </Section>
 
-          {/* Zone géographique */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Zone de couverture</h2>
-            <p className="text-gray-700">
-              RandoMatch est actuellement disponible en France métropolitaine. Le lancement se concentre sur les régions 
-              avec une forte communauté de randonneurs, avant une expansion nationale.
-            </p>
-          </section>
+      {/* Zone géographique */}
+      <Section>
+        <SectionSubtitle>Zone de couverture</SectionSubtitle>
+        <Paragraph>
+          RandoMatch est actuellement disponible en France métropolitaine. Le lancement se concentre sur les régions 
+          avec une forte communauté de randonneurs, avant une expansion nationale.
+        </Paragraph>
+      </Section>
 
-          {/* Statut actuel */}
-          <section className="mb-12">
-            <div className="bg-pink-50 border border-pink-200 rounded-lg p-6">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Phase de pré-lancement</h2>
-              <p className="text-gray-700 mb-4">
-                RandoMatch est actuellement en développement final. Nous construisons une communauté de pré-inscrits 
-                qui seront les premiers à accéder à l'application lors du lancement officiel.
-              </p>
-              <Link 
-                href="/beta"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-700 hover:to-pink-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
-              >
-                Rejoindre la bêta
-              </Link>
-            </div>
-          </section>
+      {/* Statut actuel */}
+      <Section>
+        <HighlightBox>
+          <SectionSubtitle>Phase de pré-lancement</SectionSubtitle>
+          <Paragraph style={{ marginBottom: '16px' }}>
+            RandoMatch est actuellement en développement final. Nous construisons une communauté de pré-inscrits 
+            qui seront les premiers à accéder à l'application lors du lancement officiel.
+          </Paragraph>
+          <CTAButton href="/beta">
+            Rejoindre la bêta
+          </CTAButton>
+        </HighlightBox>
+      </Section>
 
-          {/* Valeurs */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Nos valeurs</h2>
-            <div className="space-y-4">
-              <div className="border-l-4 border-pink-600 pl-4">
-                <h3 className="font-semibold text-gray-900 mb-1">Authenticité</h3>
-                <p className="text-gray-700">Des profils réels, des passions communes, des rencontres sincères.</p>
-              </div>
-              <div className="border-l-4 border-pink-600 pl-4">
-                <h3 className="font-semibold text-gray-900 mb-1">Respect</h3>
-                <p className="text-gray-700">Un environnement sain et bienveillant pour tous les membres.</p>
-              </div>
-              <div className="border-l-4 border-pink-600 pl-4">
-                <h3 className="font-semibold text-gray-900 mb-1">Simplicité</h3>
-                <p className="text-gray-700">Une application intuitive, sans fonctionnalités superflues.</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Contact */}
-          <section className="border-t border-gray-200 pt-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Nous contacter</h2>
-            <p className="text-gray-700 mb-4">
-              Des questions sur le projet ? Une suggestion ? N'hésitez pas à nous écrire.
-            </p>
-            <Link 
-              href="/contact"
-              className="inline-flex items-center text-pink-600 hover:text-pink-700 font-semibold"
-            >
-              Formulaire de contact →
-            </Link>
-          </section>
-
-          {/* Retour */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <Link 
-              href="/"
-              className="inline-flex items-center text-pink-600 hover:text-pink-700 font-semibold"
-            >
-              ← Retour à l'accueil
-            </Link>
-          </div>
+      {/* Valeurs */}
+      <Section>
+        <SectionSubtitle>Nos valeurs</SectionSubtitle>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <ValueItem>
+            <ValueTitle>Authenticité</ValueTitle>
+            <ValueText>Des profils réels, des passions communes, des rencontres sincères.</ValueText>
+          </ValueItem>
+          <ValueItem>
+            <ValueTitle>Respect</ValueTitle>
+            <ValueText>Un environnement sain et bienveillant pour tous les membres.</ValueText>
+          </ValueItem>
+          <ValueItem>
+            <ValueTitle>Simplicité</ValueTitle>
+            <ValueText>Une application intuitive, sans fonctionnalités superflues.</ValueText>
+          </ValueItem>
         </div>
-      </div>
-    </div>
+      </Section>
+
+      {/* Contact */}
+      <Divider>
+        <SectionSubtitle>Nous contacter</SectionSubtitle>
+        <Paragraph style={{ marginBottom: '16px' }}>
+          Des questions sur le projet ? Une suggestion ? N'hésitez pas à nous écrire.
+        </Paragraph>
+        <ContactLink href="/contact">
+          Formulaire de contact →
+        </ContactLink>
+      </Divider>
+    </ContentLayout>
   );
 }

@@ -24,11 +24,8 @@ interface BlogPost {
 
 const ArticleContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  
-  @media (max-width: 768px) {
-    padding: 0;
-  }
+  background: linear-gradient(165deg, #FFFFFF 0%, #FFF8FA 50%, #FFF0F5 100%);
+  padding: 0;
   
   @media (min-width: 769px) {
     padding: 2rem 1rem;
@@ -37,11 +34,7 @@ const ArticleContainer = styled.div`
 
 const ArticleWrapper = styled.article`
   background: white;
-  
-  @media (max-width: 768px) {
-    border-radius: 0;
-    min-height: 100vh;
-  }
+  min-height: 100vh;
   
   @media (min-width: 769px) {
     border-radius: 16px;
@@ -49,6 +42,7 @@ const ArticleWrapper = styled.article`
     max-width: 800px;
     margin: 0 auto;
     overflow: hidden;
+    min-height: auto;
   }
 `;
 
@@ -276,7 +270,7 @@ const LoadingContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(165deg, #FFFFFF 0%, #FFF8FA 50%, #FFF0F5 100%);
 `;
 
 const LoadingSpinner = styled.div`

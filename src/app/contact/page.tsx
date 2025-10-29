@@ -8,11 +8,11 @@ import { fbEvents } from '@/lib/fbPixel';
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  background: #FFFFFF;
-  padding: 80px 20px;
+  background: linear-gradient(165deg, #FFFFFF 0%, #FFF8FA 50%, #FFF0F5 100%);
+  padding: 0;
   
-  @media (max-width: 768px) {
-    padding: 40px 16px;
+  @media (min-width: 769px) {
+    padding: 80px 20px;
   }
 `;
 
@@ -22,14 +22,15 @@ const ContentWrapper = styled.div`
 `;
 
 const FormCard = styled.div`
-  background: #FAFAFA;
-  border: 1px solid #E5E5E5;
-  border-radius: 16px;
-  padding: 64px;
+  background: #FFFFFF;
+  padding: 32px 24px;
+  min-height: 100vh;
   
-  @media (max-width: 768px) {
-    padding: 32px 24px;
-    border-radius: 12px;
+  @media (min-width: 769px) {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    padding: 64px;
+    min-height: auto;
   }
 `;
 

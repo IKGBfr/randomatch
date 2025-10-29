@@ -1,141 +1,251 @@
-import Link from 'next/link';
-import { Mail } from 'lucide-react';
+'use client';
 
-export const metadata = {
-  title: 'Mentions Légales',
-  description: 'Informations légales du site RandoMatch',
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+import Link from 'next/link';
+import styled from '@emotion/styled';
+import { Mail } from 'lucide-react';
+import ContentLayout from '@/components/shared/ContentLayout';
+
+const Title = styled.h1`
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 32px 0;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+const Section = styled.section`
+  margin-bottom: 32px;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+`;
+
+const Paragraph = styled.p`
+  font-size: 1rem;
+  color: #374151;
+  line-height: 1.75;
+  margin: 0 0 12px 0;
+  
+  strong {
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+`;
+
+const InfoBox = styled.div`
+  background: #EFF6FF;
+  border-left: 4px solid #3B82F6;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 0 4px 4px 0;
+`;
+
+const InfoText = styled.p`
+  font-size: 0.875rem;
+  color: #1E40AF;
+  margin: 0;
+  
+  strong {
+    font-weight: 600;
+  }
+`;
+
+const ContactBox = styled.div`
+  margin-top: 16px;
+  padding: 16px;
+  background: #F9FAFB;
+  border-radius: 8px;
+`;
+
+const ContactLabel = styled.p`
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+`;
+
+const ContactEmail = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #374151;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+`;
+
+const SmallText = styled.p`
+  font-size: 0.75rem;
+  color: #6B7280;
+  margin: 8px 0 0 0;
+`;
+
+const AddressBlock = styled.div`
+  padding-left: 16px;
+  border-left: 2px solid #E5E7EB;
+  margin-top: 8px;
+`;
+
+const StyledLink = styled.a`
+  color: #FE3C72;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #E5326A;
+  }
+`;
+
+const InternalLink = styled(Link)`
+  color: #FE3C72;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #E5326A;
+  }
+`;
+
+const Divider = styled.div`
+  border-top: 1px solid #E5E7EB;
+  padding-top: 24px;
+  margin-top: 32px;
+`;
+
+const UpdateDate = styled.p`
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin: 0;
+  
+  strong {
+    font-weight: 600;
+  }
+`;
 
 export default function MentionsLegalesPage() {
   return (
-    <div className="bg-gray-50 py-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">Mentions Légales</h1>
-          
-          <div className="prose prose-lg max-w-none space-y-8">
-            
-            {/* Éditeur */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Éditeur du site</h2>
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
-                <p className="text-sm text-blue-900">
-                  <strong>⚠️ Site en phase de pré-lancement</strong><br />
-                  La structure juridique est actuellement en cours de création.
-                </p>
-              </div>
-              
-              <p className="text-gray-700"><strong>Nom du site :</strong> RandoMatch</p>
-              <p className="text-gray-700"><strong>URL :</strong> <a href="https://www.randomatch.fr" className="text-green-600 hover:text-green-700">www.randomatch.fr</a></p>
-              <p className="text-gray-700"><strong>Statut :</strong> Projet entrepreneurial en cours de création</p>
-              
-              <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-600 mb-2"><strong>Contact :</strong></p>
-                <div className="flex items-center gap-2 text-gray-700">
-                  <Mail className="w-4 h-4" />
-                  <span className="font-mono text-sm">contact[at]randomatch[dot]fr</span>
-                </div>
-                <p className="text-xs text-gray-500 mt-2">
-                  * Remplacer [at] par @ et [dot] par . (protection anti-spam)
-                </p>
-                <p className="text-xs text-gray-500 mt-2">
-                  Les coordonnées complètes de l'éditeur sont disponibles sur simple demande à cette adresse, conformément à l'article 6-III de la LCEN.
-                </p>
-              </div>
-            </section>
+    <ContentLayout>
+      <Title>Mentions Légales</Title>
+      
+      {/* Éditeur */}
+      <Section>
+        <SectionTitle>1. Éditeur du site</SectionTitle>
+        <InfoBox>
+          <InfoText>
+            <strong>⚠️ Site en phase de pré-lancement</strong><br />
+            La structure juridique est actuellement en cours de création.
+          </InfoText>
+        </InfoBox>
+        
+        <Paragraph><strong>Nom du site :</strong> RandoMatch</Paragraph>
+        <Paragraph>
+          <strong>URL :</strong>{' '}
+          <StyledLink href="https://www.randomatch.fr" target="_blank" rel="noopener">
+            www.randomatch.fr
+          </StyledLink>
+        </Paragraph>
+        <Paragraph><strong>Statut :</strong> Projet entrepreneurial en cours de création</Paragraph>
+        
+        <ContactBox>
+          <ContactLabel>Contact :</ContactLabel>
+          <ContactEmail>
+            <Mail style={{ width: 16, height: 16 }} />
+            <span>contact[at]randomatch[dot]fr</span>
+          </ContactEmail>
+          <SmallText>
+            * Remplacer [at] par @ et [dot] par . (protection anti-spam)
+          </SmallText>
+          <SmallText>
+            Les coordonnées complètes de l'éditeur sont disponibles sur simple demande à cette adresse, conformément à l'article 6-III de la LCEN.
+          </SmallText>
+        </ContactBox>
+      </Section>
 
-            {/* Directeur de publication */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Directeur de la publication</h2>
-              <p className="text-gray-700">Le directeur de la publication est le responsable du projet RandoMatch.</p>
-              <p className="text-gray-700">Coordonnées disponibles sur demande à : <span className="font-mono text-sm">contact[at]randomatch[dot]fr</span></p>
-            </section>
+      {/* Directeur de publication */}
+      <Section>
+        <SectionTitle>2. Directeur de la publication</SectionTitle>
+        <Paragraph>Le directeur de la publication est le responsable du projet RandoMatch.</Paragraph>
+        <Paragraph>
+          Coordonnées disponibles sur demande à :{' '}
+          <span style={{ fontFamily: "'Courier New', monospace", fontSize: '0.875rem' }}>
+            contact[at]randomatch[dot]fr
+          </span>
+        </Paragraph>
+      </Section>
 
-            {/* Hébergement */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. Hébergement</h2>
-              <div className="space-y-2">
-                <p className="text-gray-700"><strong>Hébergeur du site :</strong></p>
-                <div className="pl-4 border-l-2 border-gray-300">
-                  <p className="text-gray-700">Vercel Inc.</p>
-                  <p className="text-gray-700">440 N Barranca Ave #4133</p>
-                  <p className="text-gray-700">Covina, CA 91723, États-Unis</p>
-                  <p className="text-gray-700">Site : <a href="https://vercel.com" className="text-green-600 hover:text-green-700" target="_blank" rel="noopener">vercel.com</a></p>
-                </div>
-              </div>
-            </section>
+      {/* Hébergement */}
+      <Section>
+        <SectionTitle>3. Hébergement</SectionTitle>
+        <Paragraph><strong>Hébergeur du site :</strong></Paragraph>
+        <AddressBlock>
+          <Paragraph>Vercel Inc.</Paragraph>
+          <Paragraph>440 N Barranca Ave #4133</Paragraph>
+          <Paragraph>Covina, CA 91723, États-Unis</Paragraph>
+          <Paragraph>
+            Site :{' '}
+            <StyledLink href="https://vercel.com" target="_blank" rel="noopener">
+              vercel.com
+            </StyledLink>
+          </Paragraph>
+        </AddressBlock>
+      </Section>
 
-            {/* Propriété intellectuelle */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Propriété intellectuelle</h2>
-              <p className="text-gray-700">
-                L'ensemble du contenu de ce site (textes, images, logos, graphismes, etc.) est la propriété exclusive de RandoMatch, sauf mention contraire.
-              </p>
-              <p className="text-gray-700 mt-2">
-                Toute reproduction, distribution, modification, adaptation, retransmission ou publication de ces différents éléments est strictement interdite sans l'accord express de RandoMatch.
-              </p>
-            </section>
+      {/* Propriété intellectuelle */}
+      <Section>
+        <SectionTitle>4. Propriété intellectuelle</SectionTitle>
+        <Paragraph>
+          L'ensemble du contenu de ce site (textes, images, logos, graphismes, etc.) est la propriété exclusive de RandoMatch, sauf mention contraire.
+        </Paragraph>
+        <Paragraph>
+          Toute reproduction, distribution, modification, adaptation, retransmission ou publication de ces différents éléments est strictement interdite sans l'accord express de RandoMatch.
+        </Paragraph>
+      </Section>
 
-            {/* Données personnelles */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Protection des données personnelles</h2>
-              <p className="text-gray-700">
-                Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez de droits sur vos données personnelles.
-              </p>
-              <p className="text-gray-700 mt-2">
-                Pour plus d'informations, consultez notre{' '}
-                <Link href="/legal/privacy" className="text-green-600 hover:text-green-700 font-semibold">
-                  Politique de Confidentialité
-                </Link>.
-              </p>
-            </section>
+      {/* Données personnelles */}
+      <Section>
+        <SectionTitle>5. Protection des données personnelles</SectionTitle>
+        <Paragraph>
+          Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez de droits sur vos données personnelles.
+        </Paragraph>
+        <Paragraph>
+          Pour plus d'informations, consultez notre{' '}
+          <InternalLink href="/legal/privacy">Politique de Confidentialité</InternalLink>.
+        </Paragraph>
+      </Section>
 
-            {/* Cookies */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Cookies</h2>
-              <p className="text-gray-700">
-                Ce site utilise des cookies pour améliorer votre expérience et analyser le trafic.
-              </p>
-              <p className="text-gray-700 mt-2">
-                Pour en savoir plus, consultez notre{' '}
-                <Link href="/legal/cookies" className="text-green-600 hover:text-green-700 font-semibold">
-                  Politique de Cookies
-                </Link>.
-              </p>
-            </section>
+      {/* Cookies */}
+      <Section>
+        <SectionTitle>6. Cookies</SectionTitle>
+        <Paragraph>
+          Ce site utilise des cookies pour améliorer votre expérience et analyser le trafic.
+        </Paragraph>
+        <Paragraph>
+          Pour en savoir plus, consultez notre{' '}
+          <InternalLink href="/legal/cookies">Politique de Cookies</InternalLink>.
+        </Paragraph>
+      </Section>
 
-            {/* Loi applicable */}
-            <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Loi applicable</h2>
-              <p className="text-gray-700">
-                Les présentes mentions légales sont régies par la loi française. En cas de litige, et après échec de toute tentative de recherche d'une solution amiable, les tribunaux français seront seuls compétents.
-              </p>
-            </section>
+      {/* Loi applicable */}
+      <Section>
+        <SectionTitle>7. Loi applicable</SectionTitle>
+        <Paragraph>
+          Les présentes mentions légales sont régies par la loi française. En cas de litige, et après échec de toute tentative de recherche d'une solution amiable, les tribunaux français seront seuls compétents.
+        </Paragraph>
+      </Section>
 
-            {/* Dernière mise à jour */}
-            <section className="pt-6 border-t border-gray-200">
-              <p className="text-sm text-gray-500">
-                <strong>Dernière mise à jour :</strong> 29 octobre 2025
-              </p>
-            </section>
-
-          </div>
-
-          {/* Retour */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <Link 
-              href="/"
-              className="inline-flex items-center text-green-600 hover:text-green-700 font-semibold"
-            >
-              ← Retour à l'accueil
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+      {/* Dernière mise à jour */}
+      <Divider>
+        <UpdateDate>
+          <strong>Dernière mise à jour :</strong> 29 octobre 2025
+        </UpdateDate>
+      </Divider>
+    </ContentLayout>
   );
 }
