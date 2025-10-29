@@ -10,8 +10,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #FFFFFF;
-  color: white;
+  background: linear-gradient(165deg, #FFFFFF 0%, #FFF8FA 50%, #FFF0F5 100%);
   padding: 30px;
   text-align: center;
   font-family: 'Poppins', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -30,14 +29,13 @@ const Container = styled.div`
 `;
 
 const ContentCard = styled.div`
-  background: rgba(20, 30, 48, 0.85);
-  backdrop-filter: blur(20px);
+  background: #FFFFFF;
   padding: 40px;
   border-radius: 20px;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(254, 60, 114, 0.1);
   animation: fadeIn 0.6s ease-out;
   
   @keyframes fadeIn {
@@ -65,6 +63,7 @@ const ContentCard = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-shadow: none;
   }
 `;
 
@@ -72,7 +71,7 @@ const Title = styled.h1`
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 15px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: #1A1A1A;
   line-height: 1.2;
   
   @media (max-width: 768px) {
@@ -87,23 +86,19 @@ const Title = styled.h1`
 const Subtitle = styled.p`
   font-size: 1.1rem;
   margin-bottom: 30px;
-  opacity: 0.95;
+  color: #666666;
 `;
 
 const PromoTag = styled.div`
-  background: rgba(255, 193, 7, 0.2);
-  border: 2px solid #ffc107;
-  color: #ffc107;
-  padding: 10px 15px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #FFF5F7, #FFF0F5);
+  border: 2px solid #FE3C72;
+  color: #E5326A;
+  padding: 12px 15px;
+  border-radius: 12px;
   margin-bottom: 25px;
   font-weight: 600;
-  animation: pulse 2s infinite;
-  
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-  }
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(254, 60, 114, 0.15);
 `;
 
 const FormGroup = styled.div`
@@ -115,39 +110,39 @@ const Label = styled.label`
   display: block;
   font-size: 0.95rem;
   margin-bottom: 8px;
-  font-weight: 500;
-  opacity: 0.95;
+  font-weight: 600;
+  color: #374151;
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 12px 15px;
-  background: #FFFFFF;
-  border: 2px solid rgba(254, 60, 114, 0.3);
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
   border-radius: 10px;
-  color: #1a3a52;
+  color: #1A1A1A;
   font-size: 1rem;
   transition: all 0.3s ease;
   
   &::placeholder {
-    color: rgba(26, 58, 82, 0.5);
+    color: #9CA3AF;
   }
   
   &:focus {
     outline: none;
     border-color: #FE3C72;
     background: #FFFFFF;
-    box-shadow: 0 0 15px rgba(254, 60, 114, 0.2);
+    box-shadow: 0 0 0 3px rgba(254, 60, 114, 0.1);
   }
 `;
 
 const Select = styled.select`
   width: 100%;
   padding: 12px 15px;
-  background: #FFFFFF;
-  border: 2px solid rgba(254, 60, 114, 0.3);
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
   border-radius: 10px;
-  color: #1a3a52;
+  color: #1A1A1A;
   font-size: 1rem;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -156,12 +151,12 @@ const Select = styled.select`
     outline: none;
     border-color: #FE3C72;
     background: #FFFFFF;
-    box-shadow: 0 0 15px rgba(254, 60, 114, 0.2);
+    box-shadow: 0 0 0 3px rgba(254, 60, 114, 0.1);
   }
   
   option {
     background: #FFFFFF;
-    color: #1a3a52;
+    color: #1A1A1A;
   }
 `;
 
@@ -175,12 +170,14 @@ const RadioOption = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: #374151;
+  font-weight: 500;
   
   input[type="radio"] {
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 2px solid #D1D5DB;
     border-radius: 50%;
     margin-right: 8px;
     position: relative;
@@ -279,22 +276,22 @@ const SuccessMessage = styled.div`
 `;
 
 const LaunchInfoBox = styled.div`
-  background: rgba(255, 193, 7, 0.15);
-  border: 2px solid rgba(255, 193, 7, 0.4);
+  background: linear-gradient(135deg, #FFF5F7, #FFF0F5);
+  border: 2px solid rgba(254, 60, 114, 0.3);
   border-radius: 10px;
   padding: 15px;
   margin-top: 20px;
   
   strong {
     display: block;
-    color: #ffc107;
+    color: #E5326A;
     font-size: 1rem;
     margin-bottom: 8px;
   }
   
   p {
     font-size: 0.95rem;
-    opacity: 0.95;
+    color: #666666;
     margin: 0;
   }
 `;
@@ -312,7 +309,7 @@ const ErrorMessage = styled.div`
 const Disclaimer = styled.p`
   font-size: 0.85rem;
   margin-top: 20px;
-  opacity: 0.8;
+  color: #9CA3AF;
   text-align: center;
 `;
 
@@ -573,7 +570,7 @@ export default function Home() {
           )}
           
           <Disclaimer>
-            Données protégées selon RGPD. En t&apos;inscrivant, tu acceptes nos <Link href="/legal/mentions" style={{ color: '#6ba6cd', textDecoration: 'underline' }}>conditions</Link>.
+            Données protégées selon RGPD. En t&apos;inscrivant, tu acceptes nos <Link href="/legal/mentions" style={{ color: '#FE3C72', textDecoration: 'underline' }}>conditions</Link>.
           </Disclaimer>
         </ContentCard>
       </Container>

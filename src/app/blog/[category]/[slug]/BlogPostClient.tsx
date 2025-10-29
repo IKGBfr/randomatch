@@ -98,7 +98,7 @@ const ArticleHeader = styled.header`
   }
 `;
 
-const CategoryBadge = styled.span`
+const CategoryBadge = styled(Link)`
   display: inline-block;
   background: linear-gradient(135deg, #FE3C72, #FF5485);
   color: white;
@@ -109,6 +109,13 @@ const CategoryBadge = styled.span`
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 1rem;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(254, 60, 114, 0.4);
+  }
 `;
 
 const ArticleTitle = styled.h1`
@@ -418,8 +425,10 @@ export default function BlogPostPage({
           )}
 
           <ArticleHeader>
-            {post.category && (
-              <CategoryBadge>{post.category.toUpperCase()}</CategoryBadge>
+            {post.category && categorySlug && (
+              <CategoryBadge href={`/blog/${categorySlug}`}>
+                {post.category.toUpperCase()}
+              </CategoryBadge>
             )}
             <ArticleTitle>{post.title}</ArticleTitle>
             <ArticleMeta>

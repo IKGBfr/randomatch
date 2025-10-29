@@ -78,30 +78,31 @@ const FormGroup = styled.div`
 `;
 
 const Label = styled.label`
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #333333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
   letter-spacing: -0.01em;
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 14px 16px;
-  background: #FFFFFF;
-  border: 1px solid #E5E5E5;
-  border-radius: 8px;
+  padding: 12px 15px;
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
   font-size: 1rem;
-  color: #000000;
-  transition: all 0.2s ease;
+  color: #1A1A1A;
+  transition: all 0.3s ease;
   
   &::placeholder {
-    color: #999999;
+    color: #9CA3AF;
   }
   
   &:focus {
     outline: none;
-    border-color: #000000;
+    border-color: #FE3C72;
     background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(254, 60, 114, 0.1);
   }
   
   &:disabled {
@@ -112,25 +113,26 @@ const Input = styled.input`
 
 const TextArea = styled.textarea`
   width: 100%;
-  padding: 14px 16px;
-  background: #FFFFFF;
-  border: 1px solid #E5E5E5;
-  border-radius: 8px;
+  padding: 12px 15px;
+  background: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
   font-size: 1rem;
-  color: #000000;
+  color: #1A1A1A;
   font-family: inherit;
   resize: vertical;
   min-height: 160px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   
   &::placeholder {
-    color: #999999;
+    color: #9CA3AF;
   }
   
   &:focus {
     outline: none;
-    border-color: #000000;
+    border-color: #FE3C72;
     background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(254, 60, 114, 0.1);
   }
   
   &:disabled {
@@ -141,27 +143,32 @@ const TextArea = styled.textarea`
 
 const SubmitButton = styled.button`
   width: 100%;
-  padding: 16px;
-  background: #000000;
-  color: #FFFFFF;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #E5326A, #FE3C72);
+  color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   margin-top: 8px;
+  box-shadow: 0 4px 15px rgba(254, 60, 114, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   
   &:hover:not(:disabled) {
-    background: #333333;
+    background: linear-gradient(135deg, #D12A5E, #E5326A);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(254, 60, 114, 0.6);
   }
   
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 `;
@@ -290,7 +297,7 @@ export default function ContactPage() {
       <ContentWrapper>
         <FormCard>
           <Header>
-            <Mail style={{ width: 32, height: 32, color: '#000000' }} />
+            <Mail style={{ width: 32, height: 32, color: '#FE3C72' }} />
             <Title>Contact</Title>
           </Header>
 

@@ -7,7 +7,7 @@ import { use } from 'react';
 
 const Container = styled.div`
   min-height: 100vh;
-  background: #f9f9f9;
+  background: linear-gradient(165deg, #FFFFFF 0%, #FFF8FA 50%, #FFF0F5 100%);
   padding: 40px 20px;
 `;
 
@@ -41,6 +41,36 @@ const AuthorHeader = styled.header`
   }
 `;
 
+const AuthorHeaderContent = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+`;
+
+const AvatarWrapper = styled.div`
+  flex-shrink: 0;
+`;
+
+const Avatar = styled(Image)`
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #FE3C72;
+  box-shadow: 0 4px 12px rgba(254, 60, 114, 0.3);
+`;
+
+const AuthorInfo = styled.div`
+  flex: 1;
+`;
+
 const AuthorTitle = styled.h1`
   font-size: 2.5rem;
   font-weight: bold;
@@ -56,6 +86,14 @@ const AuthorBio = styled.p`
   font-size: 1.1rem;
   color: #666;
   line-height: 1.6;
+`;
+
+const AuthorDescription = styled.p`
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.7;
+  margin-top: 20px;
+  max-width: 800px;
 `;
 
 const PostsCount = styled.p`
@@ -111,7 +149,7 @@ const ArticleContent = styled.div`
   padding: 25px;
 `;
 
-const CategoryBadge = styled.span`
+const CategoryBadge = styled(Link)`
   display: inline-block;
   background: #FE3C72;
   color: white;
@@ -122,6 +160,13 @@ const CategoryBadge = styled.span`
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(254, 60, 114, 0.4);
+  }
 `;
 
 const ArticleTitle = styled.h2`
@@ -183,6 +228,16 @@ interface AuthorPageProps {
   params: Promise<{ username: string }>;
 }
 
+// Informations d'auteur
+const authorInfo: Record<string, { bio: string; description: string; role: string; avatar?: string }> = {
+  'anthony': {
+    bio: 'Créateur de RandoMatch',
+    description: 'Passionné de nature, de voyage à vélo, de randonnée et de montagne. Développeur passionné par les nouvelles technologies, Anthony partage les coulisses du développement de RandoMatch, ses apprentissages, ses choix techniques et sa vision pour révolutionner les rencontres entre amoureux de la nature et du grand air.',
+    role: 'Fondateur & Développeur',
+    avatar: '/anthony-biencourt.jpeg'
+  }
+};
+
 function slugifyCategory(category: string): string {
   return category
     .toLowerCase()
@@ -198,6 +253,8 @@ export default function AuthorPage({ params }: AuthorPageProps) {
   const [loading, setLoading] = useState(true);
 
   const authorName = resolvedParams.username.charAt(0).toUpperCase() + resolvedParams.username.slice(1);
+  const authorUsername = resolvedParams.username;
+  const author = authorInfo[authorUsername] || { bio: 'Auteur', description: '', role: 'Auteur' };
 
   useEffect(() => {
     fetch(`/api/blog/author/${resolvedParams.username}`)
@@ -214,17 +271,78 @@ export default function AuthorPage({ params }: AuthorPageProps) {
   }, [resolvedParams.username]);
 
   return (
-    <Container>
-      <Content>
-        <BackLink href="/blog">← Retour au blog</BackLink>
-        
-        <AuthorHeader>
-          <AuthorTitle>{authorName}</AuthorTitle>
-          <AuthorBio>Créateur de RandoMatch</AuthorBio>
-          <PostsCount>
-            {posts.length} {posts.length > 1 ? 'articles publiés' : 'article publié'}
-          </PostsCount>
-        </AuthorHeader>
+    <>
+      {/* Structured Data - ProfilePage with Person Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            "mainEntity": {
+              "@type": "Person",
+              "name": authorName,
+              "description": author.description,
+              "jobTitle": author.role,
+              "url": `https://www.randomatch.fr/auteur/${authorUsername}`,
+              "worksFor": {
+                "@type": "Organization",
+                "name": "RandoMatch"
+              }
+            },
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Accueil",
+                  "item": "https://www.randomatch.fr"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Blog",
+                  "item": "https://www.randomatch.fr/blog"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": authorName,
+                  "item": `https://www.randomatch.fr/auteur/${authorUsername}`
+                }
+              ]
+            }
+          })
+        }}
+      />
+      <Container>
+        <Content>
+          <BackLink href="/blog">← Retour au blog</BackLink>
+          
+          <AuthorHeader>
+            <AuthorHeaderContent>
+              {author.avatar && (
+                <AvatarWrapper>
+                  <Avatar
+                    src={author.avatar}
+                    alt={authorName}
+                    width={120}
+                    height={120}
+                    priority
+                  />
+                </AvatarWrapper>
+              )}
+              <AuthorInfo>
+                <AuthorTitle>{authorName}</AuthorTitle>
+                <AuthorBio>{author.bio}</AuthorBio>
+                {author.description && <AuthorDescription>{author.description}</AuthorDescription>}
+                <PostsCount>
+                  {posts.length} {posts.length > 1 ? 'articles publiés' : 'article publié'}
+                </PostsCount>
+              </AuthorInfo>
+            </AuthorHeaderContent>
+          </AuthorHeader>
 
         {loading ? (
           <EmptyState>Chargement...</EmptyState>
@@ -245,7 +363,9 @@ export default function AuthorPage({ params }: AuthorPageProps) {
                   </ArticleImageWrapper>
                 </Link>
                 <ArticleContent>
-                  <CategoryBadge>{post.category}</CategoryBadge>
+                  <CategoryBadge href={`/blog/${slugifyCategory(post.category)}`}>
+                    {post.category}
+                  </CategoryBadge>
                   <ArticleTitle>
                     <Link href={`/blog/${slugifyCategory(post.category)}/${post.slug}`}>
                       {post.title}
@@ -268,5 +388,6 @@ export default function AuthorPage({ params }: AuthorPageProps) {
         )}
       </Content>
     </Container>
+    </>
   );
 }

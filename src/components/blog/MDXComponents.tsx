@@ -30,27 +30,53 @@ export const CTATitle = styled.h3`
   }
 `;
 
-// Composant React pur pour forcer le style - ultra simple
+// Styled component avec priorité CSS maximale
+const StyledCTAButton = styled.a`
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(135deg, #FE3C72, #FF5485) !important;
+  color: #FFFFFF !important;
+  padding: 1rem 2.5rem !important;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 4px 12px rgba(254, 60, 114, 0.3) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  line-height: 1 !important;
+  min-height: 48px !important;
+  cursor: pointer !important;
+  
+  /* Force la couleur blanche sur TOUS les enfants */
+  & * {
+    color: #FFFFFF !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+  }
+  
+  &:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(254, 60, 114, 0.4) !important;
+    color: #FFFFFF !important;
+    
+    & * {
+      color: #FFFFFF !important;
+    }
+  }
+  
+  &:active {
+    transform: translateY(0) !important;
+  }
+`;
+
 export const CTAButton = ({ href, children }: { href: string; children: React.ReactNode }) => {
   return (
-    <a
-      href={href}
-      style={{
-        display: 'inline-block',
-        background: 'linear-gradient(135deg, #FE3C72, #FF5485)',
-        color: 'white',
-        padding: '0.75rem 2rem',
-        borderRadius: '8px',
-        fontSize: '1rem',
-        fontWeight: 600,
-        textDecoration: 'none',
-        transition: 'all 0.2s ease',
-        boxShadow: '0 2px 8px rgba(254, 60, 114, 0.25)',
-        textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-      }}
-    >
+    <StyledCTAButton href={href}>
       {children}
-    </a>
+    </StyledCTAButton>
   );
 };
 

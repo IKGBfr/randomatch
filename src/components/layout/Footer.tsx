@@ -12,9 +12,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-pink-600 to-pink-700 shadow-lg">
-                <Heart className="w-6 h-6 text-white" strokeWidth={2.5} />
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="flex items-center justify-center w-10 h-10 rounded-[10px] bg-gradient-to-br from-[#FE3C72] to-[#FF6B9D] shadow-[0_4px_12px_rgba(254,60,114,0.25)] transition-all group-hover:shadow-[0_6px_16px_rgba(254,60,114,0.35)]">
+                <span className="text-[20px] leading-none">🤍</span>
               </div>
               <span className="font-montserrat font-bold text-xl text-white">
                 RandoMatch

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { Mountain, Users, Heart, Target } from 'lucide-react';
+import { Compass, Users, Heart, Target, Shield } from 'lucide-react';
 import ContentLayout from '@/components/shared/ContentLayout';
 
 const Header = styled.div`
@@ -200,7 +200,7 @@ const Divider = styled.div`
 
 export default function AboutPage() {
   return (
-    <ContentLayout maxWidth="1024px">
+    <ContentLayout>
       {/* Header */}
       <Header>
         <Title>À propos de RandoMatch</Title>
@@ -226,7 +226,7 @@ export default function AboutPage() {
           <Paragraph>
             Les applications de rencontres généralistes ne permettent pas de filtrer efficacement par centres d'intérêt réels. 
             Pour les randonneurs, trouver un partenaire qui partage cette passion est difficile. RandoMatch résout ce problème 
-            en créant une communauté dédiée aux amoureux de la montagne et des sentiers.
+            en créant une communauté dédiée aux passionnés de randonnée et de nature.
           </Paragraph>
         </InfoBox>
       </Section>
@@ -234,7 +234,7 @@ export default function AboutPage() {
       {/* Notre approche */}
       <Section>
         <SectionHeader>
-          <Mountain style={{ width: 32, height: 32, color: '#FE3C72' }} />
+          <Compass style={{ width: 32, height: 32, color: '#FE3C72' }} />
           <SectionTitle>Notre approche</SectionTitle>
         </SectionHeader>
         <GridContainer>
@@ -259,6 +259,25 @@ export default function AboutPage() {
         </GridContainer>
       </Section>
 
+      {/* Sécurité et confiance */}
+      <Section>
+        <SectionHeader>
+          <Shield style={{ width: 32, height: 32, color: '#FE3C72' }} />
+          <SectionTitle>Sécurité et confiance</SectionTitle>
+        </SectionHeader>
+        <InfoBox>
+          <Paragraph style={{ marginBottom: '16px' }}>
+            Contrairement aux groupes Facebook de randonnée où les faux profils et les arnaques sont monnaie courante, 
+            RandoMatch offre un environnement sécurisé et contrôlé.
+          </Paragraph>
+          <Paragraph>
+            Notre plateforme dédiée permet de vérifier l'authenticité des profils, de modérer les contenus et 
+            de protéger nos membres contre les "brouteurs" et autres tentatives d'arnaque qui empoisonnent 
+            les réseaux sociaux généralistes. Ici, vous pouvez faire des rencontres en toute sérénité.
+          </Paragraph>
+        </InfoBox>
+      </Section>
+
       {/* Fonctionnalités clés */}
       <Section>
         <SectionSubtitle>Fonctionnalités principales</SectionSubtitle>
@@ -278,6 +297,10 @@ export default function AboutPage() {
           <ListItem>
             <CheckIcon>✓</CheckIcon>
             <ListText>Profils détaillés avec photos et centres d'intérêt</ListText>
+          </ListItem>
+          <ListItem>
+            <CheckIcon>✓</CheckIcon>
+            <ListText>Vérification des profils et modération active contre les faux comptes</ListText>
           </ListItem>
         </List>
       </Section>
@@ -320,6 +343,10 @@ export default function AboutPage() {
           <ValueItem>
             <ValueTitle>Simplicité</ValueTitle>
             <ValueText>Une application intuitive, sans fonctionnalités superflues.</ValueText>
+          </ValueItem>
+          <ValueItem>
+            <ValueTitle>Sécurité</ValueTitle>
+            <ValueText>Protection contre les faux profils et arnaques pour des rencontres en toute confiance.</ValueText>
           </ValueItem>
         </div>
       </Section>

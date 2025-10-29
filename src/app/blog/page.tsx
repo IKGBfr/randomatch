@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 const Container = styled.div`
   min-height: 100vh;
-  background: #f9f9f9;
+  background: linear-gradient(165deg, #FFFFFF 0%, #FFF8FA 50%, #FFF0F5 100%);
   padding: 40px 20px;
 `;
 
@@ -95,7 +95,7 @@ const ArticleContent = styled.div`
   padding: 25px;
 `;
 
-const CategoryBadge = styled.span`
+const CategoryBadge = styled(Link)`
   display: inline-block;
   background: #FE3C72;
   color: white;
@@ -106,6 +106,13 @@ const CategoryBadge = styled.span`
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(254, 60, 114, 0.4);
+  }
 `;
 
 const ArticleTitle = styled.h2`
@@ -229,7 +236,9 @@ export default function BlogPage() {
                   </ArticleImageWrapper>
                 </Link>
                 <ArticleContent>
-                  <CategoryBadge>{post.category}</CategoryBadge>
+                  <CategoryBadge href={`/blog/${slugifyCategory(post.category)}`}>
+                    {post.category}
+                  </CategoryBadge>
                   <ArticleTitle>
                     <Link href={`/blog/${slugifyCategory(post.category)}/${post.slug}`}>
                       {post.title}

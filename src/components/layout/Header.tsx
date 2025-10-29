@@ -174,59 +174,139 @@ const MobileMenuButton = styled.button`
   }
 `;
 
-const MobileMenu = styled.div`
-  background: #FFFFFF;
-  border-top: 1px solid #E5E5E5;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+const MobileMenuOverlay = styled.div<{ isOpen: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9998;
+  opacity: ${props => props.isOpen ? 1 : 0};
+  pointer-events: ${props => props.isOpen ? 'auto' : 'none'};
+  transition: opacity 0.3s ease;
   
   @media (min-width: 768px) {
     display: none;
   }
 `;
 
-const MobileMenuContent = styled.div`
-  padding: 24px 16px;
+const MobileMenuDrawer = styled.div<{ isOpen: boolean }>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80%;
+  background: #FFFFFF;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  transform: ${props => props.isOpen ? 'translateX(0)' : 'translateX(100%)'};
+  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+const DrawerHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  border-bottom: 1px solid #E5E5E5;
+  min-height: 80px;
+`;
+
+const DrawerTitle = styled.h2`
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #000000;
+  margin: 0;
+`;
+
+const CloseButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #F5F5F5;
+  border: none;
+  border-radius: 50%;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #E5E5E5;
+    transform: rotate(90deg);
+  }
+`;
+
+const MobileMenuContent = styled.div`
+  flex: 1;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
 `;
 
 const MobileNavLink = styled(Link)`
-  display: block;
-  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
   color: #333333;
-  font-weight: 500;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 1.125rem;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 12px;
   transition: all 0.2s ease;
   
   &:hover {
     color: #FE3C72;
     background: #FFF5F7;
+    transform: translateX(4px);
+  }
+  
+  &:active {
+    transform: translateX(2px);
   }
 `;
 
 const MobileCTAContainer = styled.div`
-  padding-top: 16px;
+  padding: 32px;
   border-top: 1px solid #E5E5E5;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
 `;
 
 const MobileCTAButton = styled(Link)`
-  display: block;
-  padding: 12px 16px;
-  background: #FE3C72;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #FE3C72, #FF5485);
   color: #FFFFFF;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 1.125rem;
   text-align: center;
   text-decoration: none;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(254, 60, 114, 0.25);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(254, 60, 114, 0.3);
   transition: all 0.2s ease;
   
   &:hover {
-    background: #E5326A;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(254, 60, 114, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
   }
 `;
 
@@ -243,71 +323,98 @@ export default function Header() {
     // Check scroll position on mount
     handleScroll();
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    
+    // Lock body scroll when mobile menu is open
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   return (
-    <HeaderContainer scrolled={mounted ? scrolled : false}>
-      <Nav>
-        {/* Logo */}
-        <LogoLink href="/">
-          <LogoIcon>
-            <HeartIcon>🤍</HeartIcon>
-          </LogoIcon>
-          <LogoText>RandoMatch</LogoText>
-        </LogoLink>
+    <>
+      <HeaderContainer scrolled={mounted ? scrolled : false}>
+        <Nav>
+          {/* Logo */}
+          <LogoLink href="/">
+            <LogoIcon>
+              <HeartIcon>🤍</HeartIcon>
+            </LogoIcon>
+            <LogoText>RandoMatch</LogoText>
+          </LogoLink>
 
-        {/* Desktop Navigation */}
-        <DesktopNav>
-          {navigation.map((item) => (
-            <NavLink key={item.name} href={item.href}>
-              {item.name}
-            </NavLink>
-          ))}
-          
-          <CTAButton href="/beta">
-            Pré-inscription
-          </CTAButton>
-        </DesktopNav>
-
-        {/* Mobile Menu Button */}
-        <MobileMenuButton
-          type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? (
-            <X style={{ width: 24, height: 24 }} />
-          ) : (
-            <Menu style={{ width: 24, height: 24 }} />
-          )}
-        </MobileMenuButton>
-      </Nav>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <MobileMenu>
-          <MobileMenuContent>
+          {/* Desktop Navigation */}
+          <DesktopNav>
             {navigation.map((item) => (
-              <MobileNavLink
-                key={item.name}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <NavLink key={item.name} href={item.href}>
                 {item.name}
-              </MobileNavLink>
+              </NavLink>
             ))}
             
-            <MobileCTAContainer>
-              <MobileCTAButton
-                href="/beta"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Pré-inscription
-              </MobileCTAButton>
-            </MobileCTAContainer>
-          </MobileMenuContent>
-        </MobileMenu>
-      )}
-    </HeaderContainer>
+            <CTAButton href="/beta">
+              Pré-inscription
+            </CTAButton>
+          </DesktopNav>
+
+          {/* Mobile Menu Button */}
+          <MobileMenuButton
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X style={{ width: 24, height: 24 }} />
+            ) : (
+              <Menu style={{ width: 24, height: 24 }} />
+            )}
+          </MobileMenuButton>
+        </Nav>
+      </HeaderContainer>
+
+      {/* Mobile Menu Overlay - EN DEHORS du Header */}
+      <MobileMenuOverlay 
+        isOpen={mobileMenuOpen}
+        onClick={() => setMobileMenuOpen(false)}
+      />
+
+      {/* Mobile Menu Drawer - EN DEHORS du Header */}
+      <MobileMenuDrawer isOpen={mobileMenuOpen}>
+        <DrawerHeader>
+          <DrawerTitle>Menu</DrawerTitle>
+          <CloseButton
+            type="button"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <X style={{ width: 24, height: 24 }} />
+          </CloseButton>
+        </DrawerHeader>
+        
+        <MobileMenuContent>
+          {navigation.map((item) => (
+            <MobileNavLink
+              key={item.name}
+              href={item.href}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {item.name}
+            </MobileNavLink>
+          ))}
+        </MobileMenuContent>
+        
+        <MobileCTAContainer>
+          <MobileCTAButton
+            href="/beta"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Pré-inscription
+          </MobileCTAButton>
+        </MobileCTAContainer>
+      </MobileMenuDrawer>
+    </>
   );
 }

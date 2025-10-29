@@ -7,7 +7,7 @@ import { use } from 'react';
 
 const Container = styled.div`
   min-height: 100vh;
-  background: #f9f9f9;
+  background: linear-gradient(165deg, #FFFFFF 0%, #FFF8FA 50%, #FFF0F5 100%);
   padding: 40px 20px;
 `;
 
@@ -39,6 +39,14 @@ const CategoryHeader = styled.header`
   @media (max-width: 768px) {
     padding: 30px 20px;
   }
+`;
+
+const CategoryIntro = styled.p`
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 15px;
+  max-width: 800px;
 `;
 
 const CategoryBadge = styled.div`
@@ -187,6 +195,14 @@ interface CategoryPageProps {
   params: Promise<{ category: string }>;
 }
 
+// Descriptions uniques par catégorie
+const categoryIntros: Record<string, string> = {
+  'actualites': 'Suis l\'évolution de RandoMatch en temps réel : nouveautés, fonctionnalités, milestones et actualités du projet.',
+  'guides': 'Des guides complets pour tirer le meilleur parti de RandoMatch et multiplier tes chances de rencontres.',
+  'coulisses': 'Plonge dans les coulisses du développement : transparence totale sur la création de RandoMatch.',
+  'temoignages': 'Les plus belles histoires de rencontres nées sur RandoMatch : témoignages authentiques de nos utilisateurs.'
+};
+
 function unslugifyCategory(slug: string): string {
   return slug
     .split('-')
@@ -209,6 +225,8 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   const [loading, setLoading] = useState(true);
 
   const categoryName = unslugifyCategory(resolvedParams.category);
+  const categorySlug = resolvedParams.category;
+  const categoryIntro = categoryIntros[categorySlug];
 
   useEffect(() => {
     fetch(`/api/blog/category/${resolvedParams.category}`)
@@ -225,17 +243,60 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   }, [resolvedParams.category]);
 
   return (
-    <Container>
-      <Content>
-        <BackLink href="/blog">← Retour au blog</BackLink>
-        
-        <CategoryHeader>
-          <CategoryBadge>{categoryName}</CategoryBadge>
-          <CategoryTitle>{categoryName}</CategoryTitle>
-          <PostsCount>
-            {posts.length} {posts.length > 1 ? 'articles' : 'article'}
-          </PostsCount>
-        </CategoryHeader>
+    <>
+      {/* Structured Data - CollectionPage with Breadcrumbs */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": `${categoryName} - Blog RandoMatch`,
+            "description": categoryIntro || `Articles de la catégorie ${categoryName}`,
+            "url": `https://www.randomatch.fr/blog/${categorySlug}`,
+            "isPartOf": {
+              "@type": "WebSite",
+              "name": "RandoMatch",
+              "url": "https://www.randomatch.fr"
+            },
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Accueil",
+                  "item": "https://www.randomatch.fr"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Blog",
+                  "item": "https://www.randomatch.fr/blog"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": categoryName,
+                  "item": `https://www.randomatch.fr/blog/${categorySlug}`
+                }
+              ]
+            }
+          })
+        }}
+      />
+      <Container>
+        <Content>
+          <BackLink href="/blog">← Retour au blog</BackLink>
+          
+          <CategoryHeader>
+            <CategoryBadge>{categoryName}</CategoryBadge>
+            <CategoryTitle>{categoryName}</CategoryTitle>
+            {categoryIntro && <CategoryIntro>{categoryIntro}</CategoryIntro>}
+            <PostsCount>
+              {posts.length} {posts.length > 1 ? 'articles' : 'article'}
+            </PostsCount>
+          </CategoryHeader>
 
         {loading ? (
           <EmptyState>Chargement...</EmptyState>
@@ -282,5 +343,6 @@ export default function CategoryPage({ params }: CategoryPageProps) {
         )}
       </Content>
     </Container>
+    </>
   );
 }
