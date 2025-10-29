@@ -17,9 +17,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const siteUrl = 'https://randomatch.fr';
+  const siteUrl = 'https://www.randomatch.fr';
   const articleUrl = `${siteUrl}/blog/${post.category.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-')}/${post.slug}`;
-  const imageUrl = post.image.startsWith('http') ? post.image : `${siteUrl}${post.image}`;
+  
+  // Image avec fallback vers og-default.jpg si aucune image spécifique
+  const defaultImage = `${siteUrl}/og-default.jpg`;
+  const imageUrl = post.image 
+    ? (post.image.startsWith('http') ? post.image : `${siteUrl}${post.image}`)
+    : defaultImage;
 
   return {
     title: `${post.title} - RandoMatch Blog`,

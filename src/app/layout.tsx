@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     siteName: "RandoMatch",
     images: [
       {
-        url: "https://www.randomatch.fr/og-image.jpg",
+        url: "https://www.randomatch.fr/og-default.jpg",
         width: 1200,
         height: 630,
         alt: "RandoMatch - Rencontres pour Randonneurs",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RandoMatch - Rencontres pour Randonneurs",
     description: "Trouve ton partenaire de randonnée idéal",
-    images: ["https://www.randomatch.fr/og-image.jpg"],
+    images: ["https://www.randomatch.fr/og-default.jpg"],
     creator: "@randomatch",
   },
 

@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import Head from 'next/head';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { fbEvents } from '@/lib/fbPixel';
@@ -478,17 +477,7 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Head>
-        <title>RandoMatch - Trouve ton partenaire de randonnée !</title>
-        <meta name="description" content="Rejoins des célibataires pour des randonnées en France. Trouve ton match parfait !" />
-        <meta property="og:title" content="RandoMatch - Rencontres pour Randonneurs" />
-        <meta property="og:description" content="L'app de rencontres dédiée aux passionnés de randonnée" />
-        <meta property="og:image" content="/bg.jpg" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      
-      <Container>
+    <Container>
         <ContentCard>
           <Title>🥾 RandoMatch 💕</Title>
           <Subtitle>L&apos;app arrive bientôt ! Sois parmi les premiers avertis</Subtitle>
@@ -594,6 +583,5 @@ export default function Home() {
           </Disclaimer>
         </ContentCard>
       </Container>
-    </>
   );
 }
