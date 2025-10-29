@@ -233,17 +233,21 @@ const MobileCTAButton = styled(Link)`
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+    // Check scroll position on mount
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <HeaderContainer scrolled={scrolled}>
+    <HeaderContainer scrolled={mounted ? scrolled : false}>
       <Nav>
         {/* Logo */}
         <LogoLink href="/">
