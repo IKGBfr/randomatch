@@ -30,7 +30,9 @@ const Container = styled.div`
   }
   
   @media (max-width: 768px) {
-    padding: 80px 20px 40px 20px;
+    padding: 70px 20px 30px 20px;
+    min-height: 100vh;
+    justify-content: flex-start;
   }
 `;
 
