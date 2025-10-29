@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Inter } from "next/font/google";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import FacebookPixel from "@/components/FacebookPixel";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -89,6 +90,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
+  const FB_PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID || '';
 
   return (
     <html lang="fr">
@@ -96,6 +98,7 @@ export default function RootLayout({
         className={`${montserrat.variable} ${inter.variable} antialiased`}
       >
         {GA_MEASUREMENT_ID && <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />}
+        {FB_PIXEL_ID && <FacebookPixel pixelId={FB_PIXEL_ID} />}
         <Header />
         <main className="pt-16 md:pt-20 min-h-screen">
           {children}
