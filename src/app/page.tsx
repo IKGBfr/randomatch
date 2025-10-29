@@ -30,7 +30,7 @@ const Container = styled.div`
   }
   
   @media (max-width: 768px) {
-    padding: 70px 20px 30px 20px;
+    padding: 70px 0 30px 0;
     min-height: 100vh;
     justify-content: flex-start;
   }
@@ -57,11 +57,43 @@ const TextContent = styled.div`
   flex: 1;
   max-width: 600px;
   z-index: 2;
-  text-align: right;
+  text-align: center;
   
-  @media (max-width: 1024px) {
-    text-align: center;
-    max-width: 100%;
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+  }
+`;
+
+const LogoIcon = styled.div`
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #FE3C72, #FF6B9D);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  line-height: 1;
+  box-shadow: 0 8px 24px rgba(254, 60, 114, 0.3);
+  flex-shrink: 0;
+  
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+    border-radius: 14px;
   }
 `;
 
@@ -70,7 +102,7 @@ const Title = styled.h1`
   font-size: 4.5rem;
   font-weight: 800;
   color: #000000;
-  margin: 0 0 20px 0;
+  margin: 0;
   letter-spacing: -0.02em;
   line-height: 1.1;
   
@@ -80,7 +112,6 @@ const Title = styled.h1`
   
   @media (max-width: 768px) {
     font-size: 2.75rem;
-    margin-bottom: 16px;
   }
 `;
 
@@ -101,11 +132,7 @@ const CTAGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  align-items: flex-end;
-  
-  @media (max-width: 1024px) {
-    align-items: center;
-  }
+  align-items: center;
 `;
 
 const BetaButton = styled(Link)`
@@ -166,7 +193,7 @@ const MockupContainer = styled.div`
   
   @media (max-width: 768px) {
     max-width: 100%;
-    padding: 0 10px;
+    padding: 0;
   }
 `;
 
@@ -217,7 +244,10 @@ export default function HomePage() {
       
       <HeroSection>
         <TextContent>
-          <Title>RandoMatch</Title>
+          <TitleContainer>
+            <LogoIcon>🤍</LogoIcon>
+            <Title>RandoMatch</Title>
+          </TitleContainer>
           <Tagline>L&apos;amour commence sur les sentiers</Tagline>
           <CTAGroup>
             <BetaButton href="/beta">
@@ -231,9 +261,10 @@ export default function HomePage() {
           <MockupImage
             src="/mockup1.png"
             alt="RandoMatch App Preview"
-            width={400}
-            height={815}
+            width={800}
+            height={1630}
             priority
+            quality={100}
           />
         </MockupContainer>
       </HeroSection>

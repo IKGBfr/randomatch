@@ -1,136 +1,313 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, Mail, Facebook, Instagram } from 'lucide-react';
+import styled from '@emotion/styled';
+import { Heart, Facebook, Instagram } from 'lucide-react';
+
+const FooterContainer = styled.footer`
+  background-color: #1A1A1A;
+  color: #D1D5DB;
+`;
+
+const FooterContent = styled.div`
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 16px;
+  
+  @media (min-width: 640px) {
+    padding: 48px 24px;
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 48px 32px;
+  }
+`;
+
+const FooterGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
+const MobileNavigationGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  
+  @media (min-width: 768px) {
+    display: contents;
+  }
+`;
+
+const BrandSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  @media (max-width: 767px) {
+    grid-column: 1 / -1;
+  }
+`;
+
+const BrandLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  
+  &:hover .icon {
+    box-shadow: 0 6px 16px rgba(254, 60, 114, 0.35);
+  }
+`;
+
+const LogoIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #FE3C72, #FF6B9D);
+  box-shadow: 0 4px 12px rgba(254, 60, 114, 0.25);
+  transition: all 0.2s ease;
+  font-size: 20px;
+  line-height: 1;
+`;
+
+const BrandText = styled.span`
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #FFFFFF;
+`;
+
+const BrandDescription = styled.p`
+  font-size: 0.875rem;
+  color: #9CA3AF;
+  line-height: 1.5;
+`;
+
+const NavSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const NavTitle = styled.h3`
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0;
+`;
+
+const NavList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const NavLink = styled(Link)`
+  font-size: 0.875rem;
+  color: #D1D5DB;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #EC4899;
+  }
+`;
+
+const CTASection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  @media (max-width: 767px) {
+    grid-column: 1 / -1;
+    align-items: center;
+  }
+`;
+
+const CTAButton = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FE3C72, #FF5485);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: linear-gradient(135deg, #E5326A, #E5326A);
+  }
+`;
+
+const FooterBottom = styled.div`
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid #374151;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`;
+
+const Copyright = styled.p`
+  font-size: 0.875rem;
+  color: #9CA3AF;
+  margin: 0;
+`;
+
+const SocialLinks = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
+const SocialLink = styled.a`
+  color: #9CA3AF;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: #EC4899;
+  }
+`;
+
+const MadeWithLove = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: #9CA3AF;
+`;
+
+const HeartIcon = styled(Heart)`
+  width: 16px;
+  height: 16px;
+  color: #EF4444;
+  fill: #EF4444;
+`;
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer style={{ backgroundColor: '#1A1A1A' }} className="text-gray-300">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <FooterContainer>
+      <FooterContent>
+        <FooterGrid>
           {/* Brand */}
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="flex items-center justify-center w-10 h-10 rounded-[10px] bg-gradient-to-br from-[#FE3C72] to-[#FF6B9D] shadow-[0_4px_12px_rgba(254,60,114,0.25)] transition-all group-hover:shadow-[0_6px_16px_rgba(254,60,114,0.35)]">
-                <span className="text-[20px] leading-none">🤍</span>
-              </div>
-              <span className="font-montserrat font-bold text-xl text-white">
-                RandoMatch
-              </span>
-            </Link>
-            <p className="text-sm text-gray-400">
+          <BrandSection>
+            <BrandLink href="/">
+              <LogoIcon className="icon">
+                🤍
+              </LogoIcon>
+              <BrandText>RandoMatch</BrandText>
+            </BrandLink>
+            <BrandDescription>
               L'app de rencontres pour passionnés de randonnée. Trouve ton partenaire idéal pour explorer les sentiers.
-            </p>
-          </div>
+            </BrandDescription>
+          </BrandSection>
 
-          {/* Navigation */}
-          <div>
-            <h3 className="font-semibold text-white mb-4">Navigation</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-sm hover:text-pink-400 transition-colors">
-                  Accueil
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="text-sm hover:text-pink-400 transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/a-propos" className="text-sm hover:text-pink-400 transition-colors">
-                  À propos
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm hover:text-pink-400 transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Navigation - 2 columns on mobile */}
+          <MobileNavigationGrid>
+            {/* Navigation */}
+            <NavSection>
+              <NavTitle>Navigation</NavTitle>
+              <NavList>
+                <li>
+                  <NavLink href="/">Accueil</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/blog">Blog</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/a-propos">À propos</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/contact">Contact</NavLink>
+                </li>
+              </NavList>
+            </NavSection>
 
-          {/* Legal */}
-          <div>
-            <h3 className="font-semibold text-white mb-4">Légal</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/legal/mentions" className="text-sm hover:text-pink-400 transition-colors">
-                  Mentions légales
-                </Link>
-              </li>
-              <li>
-                <Link href="/legal/privacy" className="text-sm hover:text-pink-400 transition-colors">
-                  Confidentialité
-                </Link>
-              </li>
-              <li>
-                <Link href="/legal/terms" className="text-sm hover:text-pink-400 transition-colors">
-                  CGU
-                </Link>
-              </li>
-              <li>
-                <Link href="/legal/cookies" className="text-sm hover:text-pink-400 transition-colors">
-                  Cookies
-                </Link>
-              </li>
-            </ul>
-          </div>
+            {/* Legal */}
+            <NavSection>
+              <NavTitle>Légal</NavTitle>
+              <NavList>
+                <li>
+                  <NavLink href="/legal/mentions">Mentions légales</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/legal/privacy">Confidentialité</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/legal/terms">CGU</NavLink>
+                </li>
+                <li>
+                  <NavLink href="/legal/cookies">Cookies</NavLink>
+                </li>
+              </NavList>
+            </NavSection>
+          </MobileNavigationGrid>
 
-          {/* App */}
-          <div>
-            <h3 className="font-semibold text-white mb-4">Pré-lancement</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/beta"
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-pink-600 to-pink-600 hover:from-pink-700 hover:to-pink-700 rounded-lg transition-all"
-                >
-                  <Heart className="w-4 h-4" />
-                  Rejoindre la bêta
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+          {/* CTA - Centered on mobile */}
+          <CTASection>
+            <NavTitle>Pré-lancement</NavTitle>
+            <CTAButton href="/beta">
+              <Heart style={{ width: 16, height: 16 }} />
+              Rejoindre la bêta
+            </CTAButton>
+          </CTASection>
+        </FooterGrid>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-400">
+        <FooterBottom>
+          <Copyright>
             © {currentYear} RandoMatch. Tous droits réservés.
-          </p>
+          </Copyright>
           
           {/* Social Links */}
-          <div className="flex items-center gap-4">
-            <a
+          <SocialLinks>
+            <SocialLink
               href="https://www.facebook.com/randomatch/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-pink-400 transition-colors"
               aria-label="Facebook"
             >
-              <Facebook className="w-5 h-5" />
-            </a>
-            <a
+              <Facebook style={{ width: 20, height: 20 }} />
+            </SocialLink>
+            <SocialLink
               href="https://www.instagram.com/randomatch.fr/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-pink-400 transition-colors"
               aria-label="Instagram"
             >
-              <Instagram className="w-5 h-5" />
-            </a>
-          </div>
+              <Instagram style={{ width: 20, height: 20 }} />
+            </SocialLink>
+          </SocialLinks>
           
-          <div className="flex items-center gap-2 text-sm text-gray-400">
+          <MadeWithLove>
             <span>Fait avec</span>
-            <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+            <HeartIcon />
             <span>pour les randonneurs</span>
-          </div>
-        </div>
-      </div>
-    </footer>
+          </MadeWithLove>
+        </FooterBottom>
+      </FooterContent>
+    </FooterContainer>
   );
 }
