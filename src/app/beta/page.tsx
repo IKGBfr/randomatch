@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import { fbEvents } from '@/lib/fbPixel';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -462,6 +463,9 @@ export default function Home() {
 
       if (response.ok) {
         setSuccess(true);
+        
+        // Track Facebook Pixel Lead event
+        fbEvents.lead();
       } else {
         setError(result.error || 'Une erreur est survenue');
       }

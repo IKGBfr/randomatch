@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { fbEvents } from '@/lib/fbPixel';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -34,6 +35,9 @@ export default function ContactPage() {
 
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '', website: '' });
+      
+      // Track Facebook Pixel Contact event
+      fbEvents.contact();
     } catch (error) {
       setStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Erreur inconnue');
