@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Mountain, Heart, Mail } from 'lucide-react';
+import { Mountain, Heart, Mail, Facebook, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -101,6 +101,29 @@ export default function Footer() {
           <p className="text-sm text-gray-400">
             © {currentYear} RandoMatch. Tous droits réservés.
           </p>
+          
+          {/* Social Links */}
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.facebook.com/randomatch/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-green-400 transition-colors"
+              aria-label="Facebook"
+            >
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.instagram.com/randomatch.fr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-green-400 transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="w-5 h-5" />
+            </a>
+          </div>
+          
           <div className="flex items-center gap-2 text-sm text-gray-400">
             <span>Fait avec</span>
             <Heart className="w-4 h-4 text-red-500 fill-red-500" />
