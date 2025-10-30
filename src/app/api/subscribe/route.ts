@@ -53,11 +53,24 @@ export async function POST(req: NextRequest) {
     console.log('🚀 Full contact object:', JSON.stringify(contact, null, 2));
     await apiInstance.createContact(contact);
 
-    // Send welcome email
+    // ⚠️ TEMPORARY: Block Gmail for 48h (rate limit recovery)
+    const isGmail = email.toLowerCase().includes('@gmail.com');
+    if (isGmail) {
+      console.log('⚠️ Gmail blocked temporarily - skipping welcome email for:', email);
+      return NextResponse.json(
+        { 
+          success: true, 
+          message: 'Inscription réussie ! Tu recevras ton email de bienvenue dans 48h.' 
+        },
+        { status: 200 }
+      );
+    }
+
+    // Send welcome email (MARKETING)
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
     sendSmtpEmail.sender = {
-      name: process.env.BREVO_SENDER_NAME,
-      email: process.env.BREVO_SENDER_EMAIL
+      name: process.env.BREVO_SENDER_NAME_MARKETING || 'RandoMatch',
+      email: process.env.BREVO_SENDER_EMAIL_MARKETING || 'contact@mail.randomatch.fr'
     };
     sendSmtpEmail.to = [{
       email: email,
@@ -66,10 +79,13 @@ export async function POST(req: NextRequest) {
     sendSmtpEmail.subject = `Bienvenue sur RandoMatch ! 🩷`;
     sendSmtpEmail.htmlContent = `
       <!DOCTYPE html>
-      <html>
+      <html lang="fr">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="color-scheme" content="light dark">
+        <meta name="supported-color-schemes" content="light dark">
+        <title>Bienvenue sur RandoMatch 🩷</title>
         <style>
           * {
             margin: 0;
