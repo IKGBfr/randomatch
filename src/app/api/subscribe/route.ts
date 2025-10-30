@@ -53,19 +53,6 @@ export async function POST(req: NextRequest) {
     console.log('🚀 Full contact object:', JSON.stringify(contact, null, 2));
     await apiInstance.createContact(contact);
 
-    // ⚠️ TEMPORARY: Block Gmail for 48h (rate limit recovery)
-    const isGmail = email.toLowerCase().includes('@gmail.com');
-    if (isGmail) {
-      console.log('⚠️ Gmail blocked temporarily - skipping welcome email for:', email);
-      return NextResponse.json(
-        { 
-          success: true, 
-          message: 'Inscription réussie ! Tu recevras ton email de bienvenue dans 48h.' 
-        },
-        { status: 200 }
-      );
-    }
-
     // Send welcome email (MARKETING)
     const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
     sendSmtpEmail.sender = {
