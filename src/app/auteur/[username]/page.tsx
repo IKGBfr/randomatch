@@ -234,7 +234,7 @@ const authorInfo: Record<string, { bio: string; description: string; role: strin
     bio: 'Créateur de RandoMatch',
     description: 'Passionné de nature, de voyage à vélo, de randonnée et de montagne. Développeur passionné par les nouvelles technologies, Anthony partage les coulisses du développement de RandoMatch, ses apprentissages, ses choix techniques et sa vision pour révolutionner les rencontres entre amoureux de la nature et du grand air.',
     role: 'Fondateur & Développeur',
-    avatar: '/anthony-biencourt.jpeg'
+    avatar: '/anthony.jpeg'
   }
 };
 
