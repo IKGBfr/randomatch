@@ -202,7 +202,7 @@ export async function POST(req: NextRequest) {
           .fb-button {
             display: inline-block;
             background: #1877F2;
-            color: white;
+            color: white !important;
             padding: 14px 32px;
             text-decoration: none;
             border-radius: 8px;
