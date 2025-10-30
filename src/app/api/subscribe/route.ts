@@ -87,9 +87,7 @@ export async function POST(req: NextRequest) {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="color-scheme" content="light dark">
-        <meta name="supported-color-schemes" content="light dark">
-        <title>Bienvenue sur RandoMatch 🩷</title>
+        <title>Bienvenue sur RandoMatch</title>
         <style>
           * {
             margin: 0;
@@ -98,38 +96,55 @@ export async function POST(req: NextRequest) {
           }
           
           body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #1a1a1a;
-            background-color: #fafafa;
-            padding: 20px;
+            color: #2c3e50;
+            background-color: #f5f7fa;
+            padding: 40px 20px;
           }
           
-          .container { 
-            max-width: 560px; 
+          .email-container { 
+            max-width: 600px; 
             margin: 0 auto; 
             background: white;
-            border-radius: 16px;
-            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
           }
           
           .header { 
-            background: linear-gradient(135deg, #FE3C72, #FF5485); 
-            color: white; 
-            padding: 40px 30px; 
+            background: white;
+            padding: 40px 40px 30px;
             text-align: center;
+            border-bottom: 1px solid #e8eef5;
+          }
+          
+          .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            position: relative;
+            display: inline-block;
+          }
+          
+          .logo-emoji {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            line-height: 1;
           }
           
           .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a1a1a;
             margin: 0;
-            font-size: 32px;
-            font-weight: 700;
           }
           
           .header p {
-            margin: 10px 0 0 0;
-            font-size: 16px;
-            opacity: 0.95;
+            font-size: 15px;
+            color: #64748b;
+            margin-top: 8px;
           }
           
           .content { 
@@ -137,7 +152,7 @@ export async function POST(req: NextRequest) {
           }
           
           .greeting {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
             color: #1a1a1a;
             margin-bottom: 24px;
@@ -145,155 +160,170 @@ export async function POST(req: NextRequest) {
           
           .message {
             font-size: 16px;
-            line-height: 1.8;
-            color: #4a4a4a;
-            margin-bottom: 20px;
-          }
-          
-          .highlight-box {
-            background: linear-gradient(135deg, #FFF5F7 0%, #FFE8ED 100%);
-            border-radius: 12px;
-            padding: 32px;
-            margin: 40px 0;
-            text-align: center;
-          }
-          
-          .highlight-box .emoji {
-            font-size: 40px;
-            margin-bottom: 16px;
-          }
-          
-          .highlight-box h3 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #FE3C72;
-            margin-bottom: 12px;
-          }
-          
-          .highlight-box p {
-            font-size: 15px;
-            color: #666;
             line-height: 1.7;
-            margin: 0;
-          }
-          
-          .social-box {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 32px;
-            margin: 40px 0;
-            text-align: center;
-          }
-          
-          .social-box h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 16px;
-          }
-          
-          .social-box p {
-            font-size: 15px;
-            color: #666;
-            line-height: 1.7;
+            color: #475569;
             margin-bottom: 24px;
           }
           
-          .fb-button {
+          .highlight-card {
+            background: linear-gradient(135deg, #fff5f7 0%, #fef2f4 100%);
+            border-left: 3px solid #FF6B9D;
+            border-radius: 8px;
+            padding: 28px;
+            margin: 40px 0;
+          }
+          
+          .highlight-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+          }
+          
+          .highlight-card p {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0;
+          }
+          
+          .cta-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 32px;
+            background: #f8fafc;
+            border-radius: 8px;
+          }
+          
+          .cta-section h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+          }
+          
+          .cta-section p {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 24px;
+          }
+          
+          .btn-primary {
             display: inline-block;
             background: #1877F2;
             color: white !important;
             padding: 14px 32px;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             font-size: 15px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.2s;
           }
           
-          .fb-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+          .btn-primary:hover {
+            background: #166fe5;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.25);
           }
           
           .signature {
             margin-top: 50px;
             padding-top: 30px;
-            border-top: 1px solid #f0f0f0;
-            color: #666;
+            border-top: 1px solid #e8eef5;
             font-size: 15px;
+            color: #64748b;
           }
           
           .signature strong {
-            color: #1a1a1a;
             display: block;
+            color: #1a1a1a;
+            font-weight: 600;
             margin-top: 12px;
             font-size: 16px;
           }
           
+          .signature .title {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: 4px;
+          }
+          
           .footer { 
-            background: #f8f8f8;
-            padding: 30px 40px;
+            background: #f8fafc;
+            padding: 32px 40px;
             text-align: center; 
-            color: #999; 
+            color: #94a3b8; 
             font-size: 13px;
             line-height: 1.8;
+            border-top: 1px solid #e8eef5;
           }
           
           .footer a {
-            color: #FE3C72;
+            color: #FF6B9D;
             text-decoration: none;
+            font-weight: 500;
           }
           
           @media only screen and (max-width: 600px) {
             body {
               padding: 0;
             }
-            .container {
-              border-radius: 0;
+            .email-container {
+              box-shadow: none;
             }
-            .header {
-              padding: 30px 20px;
-            }
-            .header h1 {
-              font-size: 26px;
-            }
-            .content {
-              padding: 32px 24px;
+            .header, .content, .footer {
+              padding-left: 24px;
+              padding-right: 24px;
             }
             .greeting {
-              font-size: 22px;
+              font-size: 18px;
             }
-            .highlight-box, .social-box {
-              padding: 24px;
+            .highlight-card {
+              padding: 20px;
             }
           }
         </style>
       </head>
       <body>
-        <div class="container">
+        <div class="email-container">
           <div class="header">
-            <h1>RandoMatch 🤍</h1>
-            <p>La première app de rencontres pour randonneurs</p>
+            <div class="logo">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="22" fill="url(#gradient)"/>
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF5C8D"/>
+                    <stop offset="100%" style="stop-color:#FF8FAB"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="logo-emoji">🤍</div>
+            </div>
+            <h1>RandoMatch</h1>
+            <p>L'app de rencontres pour randonneurs</p>
           </div>
           
           <div class="content">
-            <div class="greeting">Salut ${firstName} ! 👋</div>
+            <div class="greeting">Salut ${firstName} 👋</div>
             
             <p class="message">
-              Bienvenue sur la liste d'attente ! Tu fais maintenant partie d'une communauté de passionnés qui rêvent de rencontrer ${gender === 'F' ? 'leur partenaire idéal' : 'leur partenaire idéale'} sur les sentiers.
+              Bienvenue sur la liste d'attente ! Tu fais maintenant partie d'une communauté de passionnés 
+              qui rêvent de rencontrer ${gender === 'F' ? 'leur partenaire idéal' : 'leur partenaire idéale'} sur les sentiers.
             </p>
 
-            <div class="highlight-box">
-              <div class="emoji">🚀</div>
-              <h3>Lancement imminent</h3>
-              <p>Tu seras parmi les tout premiers alertés dès que l'app sera disponible. En attendant, n'hésite pas à partager RandoMatch autour de toi !</p>
+            <div class="highlight-card">
+              <h3>🚀 Lancement imminent</h3>
+              <p>
+                Tu seras parmi les tout premiers alertés dès que l'app sera disponible. 
+                En attendant, n'hésite pas à partager RandoMatch autour de toi.
+              </p>
             </div>
 
-            <div class="social-box">
-              <h3>📱 Rejoins-nous sur Facebook</h3>
-              <p>Suis notre page pour ne rien rater du lancement et partage RandoMatch avec tes amis randonneurs !</p>
-              <a href="https://www.facebook.com/randomatch/" class="fb-button">👍 Suivre @RandoMatch</a>
+            <div class="cta-section">
+              <h3>Rejoins-nous sur Facebook</h3>
+              <p>Suis notre page pour ne rien rater du lancement et partage RandoMatch avec tes amis randonneurs.</p>
+              <a href="https://www.facebook.com/randomatch/" class="btn-primary">Suivre @RandoMatch</a>
             </div>
 
             <p class="message">
@@ -303,7 +333,7 @@ export async function POST(req: NextRequest) {
             <div class="signature">
               À très bientôt sur les sentiers 🏔️
               <strong>Anthony</strong>
-              <span style="color: #999; font-size: 13px; display: block; margin-top: 4px;">Fondateur de RandoMatch</span>
+              <div class="title">Fondateur de RandoMatch</div>
             </div>
           </div>
           
