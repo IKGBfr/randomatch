@@ -76,6 +76,10 @@ export async function POST(req: NextRequest) {
       email: email,
       name: firstName
     }];
+    sendSmtpEmail.replyTo = {
+      email: 'contact@randomatch.fr',
+      name: 'RandoMatch'
+    };
     sendSmtpEmail.subject = `Bienvenue sur RandoMatch ! 🩷`;
     sendSmtpEmail.htmlContent = `
       <!DOCTYPE html>

@@ -27,6 +27,10 @@ export async function GET(req: NextRequest) {
       email: testEmail,
       name: 'Test User'
     }];
+    sendSmtpEmail.replyTo = {
+      email: 'contact@randomatch.fr',
+      name: 'RandoMatch'
+    };
     sendSmtpEmail.subject = `🧪 Test Email - ${new Date().toLocaleTimeString('fr-FR')}`;
     sendSmtpEmail.htmlContent = `
       <!DOCTYPE html>

@@ -55,7 +55,7 @@ export async function POST(request: Request) {
     // 6. Envoi email
     const sendSmtpEmail = new brevo.SendSmtpEmail();
     sendSmtpEmail.to = [{ email: 'contact@randomatch.fr', name: 'RandoMatch Support' }];
-    sendSmtpEmail.sender = { email: 'noreply@randomatch.fr', name: 'Site RandoMatch' };
+    sendSmtpEmail.sender = { email: 'contact@mail.randomatch.fr', name: 'Site RandoMatch' };
     sendSmtpEmail.replyTo = { email, name: sanitizedName };
     sendSmtpEmail.subject = `[Contact] ${sanitizedSubject}`;
     sendSmtpEmail.htmlContent = `
