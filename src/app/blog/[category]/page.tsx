@@ -199,6 +199,7 @@ interface CategoryPageProps {
 const categoryIntros: Record<string, string> = {
   'actualites': 'Suis l\'évolution de RandoMatch en temps réel : nouveautés, fonctionnalités, milestones et actualités du projet.',
   'guides': 'Des guides complets pour tirer le meilleur parti de RandoMatch et multiplier tes chances de rencontres.',
+  'guides-randonnee': 'Découvre les plus belles randonnées de France pour célibataires : itinéraires, conseils pratiques et astuces pour rencontrer en pleine nature.',
   'coulisses': 'Plonge dans les coulisses du développement : transparence totale sur la création de RandoMatch.',
   'temoignages': 'Les plus belles histoires de rencontres nées sur RandoMatch : témoignages authentiques de nos utilisateurs.'
 };

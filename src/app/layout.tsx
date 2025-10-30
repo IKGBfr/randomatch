@@ -4,6 +4,7 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import FacebookPixel from "@/components/FacebookPixel";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -112,6 +113,7 @@ export default function RootLayout({
         {GA_MEASUREMENT_ID && <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />}
         {FB_PIXEL_ID && <FacebookPixel pixelId={FB_PIXEL_ID} />}
         <Header />
+        <ScrollToTop />
         <main className="pt-16 md:pt-20 min-h-screen">
           {children}
         </main>

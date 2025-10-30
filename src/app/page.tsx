@@ -2,6 +2,7 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -19,7 +20,7 @@ const Container = styled.div`
   );
   background-size: 400% 400%;
   animation: gradientShift 25s ease infinite;
-  padding: 120px 40px 60px 40px;
+  padding: 30px 40px 30px 40px;
   position: relative;
   overflow: hidden;
   
@@ -30,37 +31,50 @@ const Container = styled.div`
   }
   
   @media (max-width: 768px) {
-    padding: 70px 0 30px 0;
+    padding: 30px 0 0 0;
     min-height: 100vh;
     justify-content: flex-start;
   }
 `;
 
-const HeroSection = styled.div`
+const HeroSection = styled.div<{ $isLoaded: boolean }>`
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  max-height: calc(100vh - 160px);
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 80px;
+  opacity: ${props => props.$isLoaded ? 1 : 0};
+  transition: opacity 0.6s ease;
   
   @media (max-width: 1024px) {
     flex-direction: column-reverse;
     text-align: center;
-    gap: 40px;
+    gap: 20px;
+    align-items: center;
+    max-height: none;
+  }
+  
+  @media (max-width: 768px) {
+    gap: 0;
+    padding: 0;
   }
 `;
 
 const TextContent = styled.div`
   flex: 1;
-  max-width: 600px;
+  max-width: 480px;
   z-index: 2;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   
   @media (max-width: 768px) {
-    padding: 0 20px;
+    padding: 20px 20px 40px 20px;
   }
 `;
 
@@ -172,15 +186,19 @@ const ComingSoon = styled.p`
   }
 `;
 
-const MockupContainer = styled.div`
+const MockupContainer = styled.div<{ $isLoaded: boolean }>`
   position: relative;
   width: 100%;
   max-width: 550px;
+  max-height: calc(100vh - 160px);
+  /* Réserve l'espace exact de l'image pour éviter le layout shift */
+  aspect-ratio: 800 / 1630;
   flex-shrink: 0;
   z-index: 2;
   
-  /* Effet de lévitation */
-  animation: float 6s ease-in-out infinite;
+  /* Effet de lévitation - activé seulement après chargement */
+  animation: ${props => props.$isLoaded ? 'float 6s ease-in-out infinite' : 'none'};
+  animation-delay: 0.3s; /* Petit délai pour un démarrage plus fluide */
   
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
@@ -188,29 +206,34 @@ const MockupContainer = styled.div`
   }
   
   @media (max-width: 1024px) {
-    max-width: 520px;
+    max-width: 400px;
+    max-height: 500px;
   }
   
   @media (max-width: 768px) {
     max-width: 100%;
+    max-height: 60vh;
     padding: 0;
+    margin: 0;
   }
 `;
 
 const MockupImage = styled(Image)`
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
   filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.15));
 `;
 
 /* Éléments décoratifs */
-const DecorativeBlob = styled.div`
+const DecorativeBlob = styled.div<{ $isLoaded: boolean }>`
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.3;
+  opacity: ${props => props.$isLoaded ? 0.3 : 0};
   z-index: 1;
-  animation: blobFloat 20s ease-in-out infinite;
+  animation: ${props => props.$isLoaded ? 'blobFloat 20s ease-in-out infinite' : 'none'};
+  transition: opacity 0.8s ease;
   
   @keyframes blobFloat {
     0%, 100% { transform: translate(0, 0) scale(1); }
@@ -237,12 +260,24 @@ const Blob2 = styled(DecorativeBlob)`
 `;
 
 export default function HomePage() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Déclenche les animations après que le composant soit monté
+    // Cela évite les sursauts lors du premier rendu
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100); // Petit délai pour laisser le DOM se stabiliser
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Container>
-      <Blob1 />
-      <Blob2 />
+      <Blob1 $isLoaded={isLoaded} />
+      <Blob2 $isLoaded={isLoaded} />
       
-      <HeroSection>
+      <HeroSection $isLoaded={isLoaded}>
         <TextContent>
           <TitleContainer>
             <LogoIcon>🤍</LogoIcon>
@@ -257,7 +292,7 @@ export default function HomePage() {
           </CTAGroup>
         </TextContent>
         
-        <MockupContainer>
+        <MockupContainer $isLoaded={isLoaded}>
           <MockupImage
             src="/mockup1.png"
             alt="RandoMatch App Preview"
@@ -265,6 +300,7 @@ export default function HomePage() {
             height={1630}
             priority
             quality={100}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 520px, 550px"
           />
         </MockupContainer>
       </HeroSection>
